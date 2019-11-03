@@ -1,3 +1,9 @@
+/* body,
+html {
+  background-color: #e3f2fd;
+  padding: 0;
+} */
+
 .image-frame {
   display: inline-block;
   border: 1px solid #fff;
@@ -52,6 +58,23 @@ span.text-content span {
   word-wrap: break-word;
 }
 
-.asdf {
-  fill: lightsalmon !important;
+.fa {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.fa:hover {
+  color: whitesmoke !important;
+}
+
+.container {
+  background-color: #e3f2fd !important;
+  padding: 0;
+}
+
+nav {
+  width: 100% !important;
+}
+
+.music-note {
+  margin: auto !important;
+  width: 50%;
 }

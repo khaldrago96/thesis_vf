@@ -5,7 +5,7 @@ var div = document.getElementById("boo");
 var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
 // Size our svg:
-renderer.resize(500, 160);
+renderer.resize(600, 200);
 
 // And get a drawing context:
 var context = renderer.getContext();
@@ -25,7 +25,7 @@ var notes = [
   new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
   new VF.StaveNote({
     clef: "treble",
-    keys: ["c/4", "b/4", "g/4"],
+    keys: ["c/4", "e/4", "g/4"],
     duration: "q"
   })
 ];
@@ -47,22 +47,3 @@ var formatter = new VF.Formatter().joinVoices(voices).format(voices, 400);
 voices.forEach(function(v) {
   v.draw(context, stave);
 });
-
-l = ["a", "b", "c", "d"];
-buttonRandomController = [];
-//random
-for (let i = 1; i <= 4; i++) {
-  let x = getRandomNumber();
-
-  document.getElementById("b" + i).innerHTML = l[x];
-}
-
-// console.log(x);
-
-function getRandomNumber() {
-  let x = Math.floor(Math.random() * 4);
-  console.log("x :", x);
-  buttonRandomController.push(x);
-  if (buttonRandomController.includes(x)) console.log(buttonRandomController);
-  return x;
-}
