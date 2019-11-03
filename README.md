@@ -1,4 +1,6 @@
 # Thesis - Webapp with Vexflow
+Created with HTML JS & CSS.
+Styling: FontAwesome Library and Bootstrap.
 
 1. Version
   Beleg from Summersemester 2018/2019
