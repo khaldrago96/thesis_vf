@@ -1,68 +1,109 @@
-var VF = Vex.Flow;
+// DRAW NOTES
+document.getElementById("buttongr").style.visibility = "hidden";
+document.getElementById("endbtn").style.visibility = "hidden";
 
-// Create an SVG renderer and attach it to the DIV element named "boo".
-var div = document.getElementById("boo");
-var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+/* FUNCTIONALITY LOGICS
+ *  below are the functions that are required to:
+ *   1. get a random number for question
+ *   2. algorithm for change the solution sequence
+ *   3. start the quiz will be triggered by a button.
+ * stove, questions and buttons will be shown after the button was clicked
+ */
+let helper;
+let rightAnswer = 0;
+let totalQuestion = 0;
 
-// Size our svg:
-renderer.resize(500, 160);
-
-// And get a drawing context:
-var context = renderer.getContext();
-
-// // Create a stave at position 10, 40 of width 400 on the canvas.
-var stave = new VF.Stave(100, 40, 700);
-
-// Add a clef and time signature.
-stave.addClef("treble").addTimeSignature("4/4");
-
-// Connect it to the rendering context and draw!
-stave.setContext(context).draw();
-
-var notes = [
-  new VF.StaveNote({ clef: "treble", keys: ["c/5"], duration: "q" }),
-  new VF.StaveNote({ clef: "treble", keys: ["d/4"], duration: "q" }),
-  new VF.StaveNote({ clef: "treble", keys: ["b/4"], duration: "qr" }),
-  new VF.StaveNote({
-    clef: "treble",
-    keys: ["c/4", "b/4", "g/4"],
-    duration: "q"
-  })
-];
-
-var notes2 = [
-  new VF.StaveNote({ clef: "treble", keys: ["c/4"], duration: "w" })
-];
-
-// Create a voice in 4/4 and add above notes
-var voices = [
-  new VF.Voice({ num_beats: 4, beat_value: 4 }).addTickables(notes),
-  new VF.Voice({ num_beats: 4, beat_value: 4 }).addTickables(notes2)
-];
-
-// Format and justify the notes to 400 pixels.
-var formatter = new VF.Formatter().joinVoices(voices).format(voices, 400);
-
-// Render voices
-voices.forEach(function(v) {
-  v.draw(context, stave);
-});
-
-l = ["a", "b", "c", "d"];
-buttonRandomController = [];
-//random
-for (let i = 1; i <= 4; i++) {
-  let x = getRandomNumber();
-
-  document.getElementById("b" + i).innerHTML = l[x];
+function randomQuestion() {
+  getRandomNumber(randomNumber);
+  showNote(randomNumber);
 }
 
-// console.log(x);
-
-function getRandomNumber() {
-  let x = Math.floor(Math.random() * 4);
-  console.log("x :", x);
-  buttonRandomController.push(x);
-  if (buttonRandomController.includes(x)) console.log(buttonRandomController);
-  return x;
+function getRandomNumber(questionNr) {
+  buttonRandomController = questionArray[questionNr - 1].l;
+  while (buttonRandomController.length !== 4) {
+    let x = Math.floor(Math.random() * 4);
+    if (
+      !buttonRandomController.includes(x) ||
+      buttonRandomController.length === 0
+    )
+      buttonRandomController.push(x);
+  }
+  for (let i = 1; i < buttonRandomController.length + 1; i++) {
+    document.getElementById("b" + i).innerHTML = buttonRandomController[i - 1];
+  }
+  delete buttonRandomController;
 }
+function startEasyScore() {
+  document.getElementById("buttongr").style.visibility = "visible";
+  document.getElementById("endbtn").style.visibility = "visible";
+  document.getElementById("startbtn").style.display = "none";
+  document.getElementById("boo").innerHTML = "";
+
+  document.getElementById("nextbtn").disabled = true;
+  document.getElementById("hint").innerHTML = "";
+  let randomNumber = Math.floor(Math.random() * questionArray.length + 1);
+  console.log("randomNumber :", randomNumber);
+  getRandomNumber(randomNumber);
+
+  var vf = new Vex.Flow.Factory({ renderer: { elementId: "boo" } });
+  var score = vf.EasyScore();
+  var system = vf.System();
+  system
+    .addStave({
+      voices: [
+        score.voice(score.notes(questionArray[randomNumber - 1].a + "/" + 1))
+      ]
+    })
+    .addClef("treble");
+  vf.draw();
+  helper = randomNumber;
+  totalQuestion++;
+  // console.log("a :", helper);
+  movebar();
+}
+
+function movebar() {
+  var elem = document.getElementById("bar");
+  // var width = totalQuestion;
+
+  elem.style.width = totalQuestion * 10 + "%";
+  elem.innerHTML = totalQuestion * 10 + "%";
+}
+
+function checkAnswer(button) {
+  document.getElementById("nextbtn").disabled = false;
+  console.log(helper);
+  //   console.log(id.innerHTML);
+  console.log(button);
+  let x = questionArray[helper - 1].a;
+  console.log("x :", x.charAt(0));
+  if (button.innerHTML + "4" === x) {
+    rightAnswer++;
+
+    document.getElementById("hint").style.color = "green";
+    document.getElementById("hint").innerHTML = "Right Answer!";
+  } else {
+    // document.getElementById(button.id.toString()).style.backgroundColor = "red";
+
+    document.getElementById("hint").style.color = "red";
+    document.getElementById("hint").innerHTML = "Right answer: " + x.charAt(0);
+  }
+  console.log("rightAnswer :", rightAnswer);
+  console.log("totalQuestion: ", totalQuestion);
+  // startEasyScore();
+}
+
+function endSession() {
+  console.log("object");
+  document.getElementById("cont").style.display = "none";
+}
+const questionArray = [
+  { a: "C4", l: ["C", "D", "A", "E"] },
+  { a: "D4", l: ["F", "D", "G", "B"] },
+  { a: "G4", l: ["G", "D", "E", "F"] },
+  { a: "B4", l: ["F", "A", "B", "E"] },
+  { a: "A4", l: ["C", "A", "E", "B"] },
+  { a: "C4", l: ["E", "B", "C", "G"] },
+  { a: "F4", l: ["D", "G", "F", "E"] },
+  { a: "E4", l: ["E", "C", "A", "D"] }
+];
