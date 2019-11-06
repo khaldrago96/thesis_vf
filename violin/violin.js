@@ -1,7 +1,9 @@
 // DRAW NOTES
 document.getElementById("buttongr").style.visibility = "hidden";
 document.getElementById("endbtn").style.visibility = "hidden";
-
+document.getElementById("bar").style.visibility = "hidden";
+document.getElementById("outer-bar").style.visibility = "hidden";
+document.getElementById("endpage").style.visibility = "hidden";
 /* FUNCTIONALITY LOGICS
  *  below are the functions that are required to:
  *   1. get a random number for question
@@ -37,8 +39,9 @@ function startEasyScore() {
   document.getElementById("buttongr").style.visibility = "visible";
   document.getElementById("endbtn").style.visibility = "visible";
   document.getElementById("startbtn").style.display = "none";
+  document.getElementById("bar").style.visibility = "visible";
+  document.getElementById("outer-bar").style.visibility = "visible";
   document.getElementById("boo").innerHTML = "";
-
   document.getElementById("nextbtn").disabled = true;
   document.getElementById("hint").innerHTML = "";
   let randomNumber = Math.floor(Math.random() * questionArray.length + 1);
@@ -57,17 +60,19 @@ function startEasyScore() {
     .addClef("treble");
   vf.draw();
   helper = randomNumber;
-  totalQuestion++;
-  // console.log("a :", helper);
+
   movebar();
+  totalQuestion++;
 }
 
 function movebar() {
   var elem = document.getElementById("bar");
-  // var width = totalQuestion;
-
   elem.style.width = totalQuestion * 10 + "%";
   elem.innerHTML = totalQuestion * 10 + "%";
+  if (totalQuestion === 10)
+    setTimeout(() => {
+      endSession();
+    }, 1500);
 }
 
 function checkAnswer(button) {
@@ -90,13 +95,18 @@ function checkAnswer(button) {
   }
   console.log("rightAnswer :", rightAnswer);
   console.log("totalQuestion: ", totalQuestion);
-  // startEasyScore();
 }
 
 function endSession() {
   console.log("object");
   document.getElementById("cont").style.display = "none";
+  document.getElementById("endpage").style.visibility = "visible";
+  let score = Math.round((rightAnswer / totalQuestion) * 100);
+  document.getElementById("total").innerHTML = score + "%";
+  document.getElementById("total2").innerHTML =
+    "Correct answers " + rightAnswer + "/" + totalQuestion;
 }
+
 const questionArray = [
   { a: "C4", l: ["C", "D", "A", "E"] },
   { a: "D4", l: ["F", "D", "G", "B"] },
