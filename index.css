@@ -131,3 +131,17 @@ nav {
   border: 2px solid #17a2b8;
   border-radius: 15px;
 }
+
+.note{
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 6px;
+  background:whitesmoke;
+}
+
+.note:hover{
+  background: lightgrey;
+}
+
