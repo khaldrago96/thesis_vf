@@ -11,9 +11,9 @@ document.getElementById("endpage").style.visibility = "hidden";
  *   3. start the quiz will be triggered by a button.
  * stove, questions and buttons will be shown after the button was clicked
  */
-let helper;
-let rightAnswer = 0;
-let totalQuestion = 0;
+// let helper;
+// let rightAnswer = 0;
+// let totalQuestion = 0;
 
 function randomQuestion() {
   getRandomNumber(randomNumber);
@@ -33,8 +33,9 @@ function getRandomNumber(questionNr) {
   for (let i = 1; i < buttonRandomController.length + 1; i++) {
     document.getElementById("b" + i).innerHTML = buttonRandomController[i - 1];
   }
-  delete buttonRandomController;
+  buttonRandomController = null;
 }
+
 function startEasyScore() {
   document.getElementById("buttongr").style.visibility = "visible";
   document.getElementById("endbtn").style.visibility = "visible";
@@ -48,7 +49,11 @@ function startEasyScore() {
   console.log("randomNumber :", randomNumber);
   getRandomNumber(randomNumber);
 
-  var vf = new Vex.Flow.Factory({ renderer: { elementId: "boo" } });
+  var vf = new Vex.Flow.Factory({
+    renderer: {
+      elementId: "boo"
+    }
+  });
   var score = vf.EasyScore();
   var system = vf.System();
   system
@@ -108,12 +113,79 @@ function endSession() {
 }
 
 const questionArray = [
-  { a: "C4", l: ["C", "D", "A", "E"] },
-  { a: "D4", l: ["F", "D", "G", "B"] },
-  { a: "G4", l: ["G", "D", "E", "F"] },
-  { a: "B4", l: ["F", "A", "B", "E"] },
-  { a: "A4", l: ["C", "A", "E", "B"] },
-  { a: "C4", l: ["E", "B", "C", "G"] },
-  { a: "F4", l: ["D", "G", "F", "E"] },
-  { a: "E4", l: ["E", "C", "A", "D"] }
+  {
+    a: "C4",
+    l: ["C", "D", "A", "E"]
+  },
+  {
+    a: "D4",
+    l: ["F", "D", "G", "B"]
+  },
+  {
+    a: "G4",
+    l: ["G", "D", "E", "F"]
+  },
+  {
+    a: "B4",
+    l: ["F", "A", "B", "E"]
+  },
+  {
+    a: "A4",
+    l: ["C", "A", "E", "B"]
+  },
+  {
+    a: "C4",
+    l: ["E", "B", "C", "G"]
+  },
+  {
+    a: "F4",
+    l: ["D", "G", "F", "E"]
+  },
+  {
+    a: "E4",
+    l: ["E", "C", "A", "D"]
+  }
 ];
+let collections = [];
+
+function playEight() {
+  let x = document.getElementById("btn-eight");
+
+  let audioEight = document.getElementById("eight");
+  let y = document.getElementById("quarter");
+  let z = document.getElementById("half");
+  setInterval(() => {
+    audioEight.play();
+  }, 100);
+  audioEight.play();
+  // collectAnswer(x.value)
+}
+
+function playQuarter() {
+  let x = document.getElementById("btn-quarter");
+  let audioQuarter = document.getElementById("quarter");
+  audioQuarter.play();
+  // collectAnswer(x.value)
+}
+
+function playHalf() {
+  let x = document.getElementById("btn-half");
+  let audioHalf = document.getElementById("half");
+  audioHalf.play();
+  // collectAnswer(x.value)
+}
+var i = 0;
+function collectAnswer() {
+  let audioEight = document.getElementById("eight");
+  let audioQuarter = document.getElementById("quarter");
+  let audioHalf = document.getElementById("half");
+  collections = [audioEight, audioEight, audioEight, audioHalf, audioEight];
+
+  if (i == collections.length) {
+    i = 0;
+    return;
+  }
+  collections[i].addEventListener("ended", collectAnswer);
+  collections[i].play();
+  i++;
+}

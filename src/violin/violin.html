@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
+    </link>
     <link rel="stylesheet" href="../../index.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -27,10 +28,23 @@
             </div>
             <p id="hint" style="text-align: center;color: green;"> </p>
 
-            <input type="image" src="../../resources/images/eigth-note.png" class="note">
-            <input type="image" src="../../resources/images/half.png" class="note">
-            <input type="image" src="../../resources/images/quarter-note.png" class="note">
+            <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" class="note"
+                onclick="playEight()" value="1">
+            <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png" class="note"
+                onclick="playQuarter()" value="2">
+            <input type="image" id="btn-half" src="../../resources/images/half.png" class="note" onclick="playHalf()"
+                value="4">
 
+            <audio id="eight">
+                <source src="../../resources/audio file/g4eight.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="quarter">
+                <source src="../../resources/audio file/g4quarter.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="half">
+                <source src="../../resources/audio file/g4half.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="collectAnswer()">PLAY</button>
             <button class="btn btn-info" onclick="startEasyScore()" id="startbtn"> start</button>
             <div class="w3-light-grey" id="outer-bar">
                 <div id="bar" class="w3-container w3-center" style="width:25%"></div>
@@ -48,12 +62,12 @@
             <h4 style="text-align: center;"><b id="total2"></b></h4>
             <div style="position:absolute;left: 45%;">
                 <button class="btn btn-primary" onclick="location.href='violin.html'">
-                    <img src="./try.png" alt="" style="width: 20px;height: 20px;"> Try again
                 </button>
             </div>
         </div>
     </div>
 </body>
+<p></p>
 <script src="../../node_modules\vexflow\releases\vexflow-debug.js"></script>
 <script src="../violin/violin.js"></script>
 

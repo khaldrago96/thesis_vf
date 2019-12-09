@@ -1,7 +1,7 @@
 {
   "name": "ba",
   "version": "1.0.0",
-  "description": "",
+  "description": "Created with HTML JS & CSS.\r Styling: FontAwesome Library and Bootstrap.",
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -13,10 +13,15 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.0",
+    "babel-eslint": "^10.0.3",
     "css-loader": "^3.2.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "exports-loader": "^0.7.0",
     "node-sass": "^4.13.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "1.19.1",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0"
   },
@@ -25,5 +30,14 @@
     "build": "webpack"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khaldrago96/thesis_vf.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/khaldrago96/thesis_vf/issues"
+  },
+  "homepage": "https://github.com/khaldrago96/thesis_vf#readme"
 }
