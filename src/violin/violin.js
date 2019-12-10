@@ -150,42 +150,44 @@ let collections = [];
 
 function playEight() {
   let x = document.getElementById("btn-eight");
-
   let audioEight = document.getElementById("eight");
-  let y = document.getElementById("quarter");
-  let z = document.getElementById("half");
-  setInterval(() => {
-    audioEight.play();
-  }, 100);
-  audioEight.play();
-  // collectAnswer(x.value)
+  collections.push(x.value);
+  console.log(collections);
 }
 
 function playQuarter() {
   let x = document.getElementById("btn-quarter");
   let audioQuarter = document.getElementById("quarter");
-  audioQuarter.play();
-  // collectAnswer(x.value)
+  collections.push(x.value);
+  console.log(collections);
 }
 
 function playHalf() {
   let x = document.getElementById("btn-half");
   let audioHalf = document.getElementById("half");
-  audioHalf.play();
-  // collectAnswer(x.value)
+  collections.push(x.value);
+  console.log(collections);
 }
 var i = 0;
 function collectAnswer() {
-  let audioEight = document.getElementById("eight");
-  let audioQuarter = document.getElementById("quarter");
-  let audioHalf = document.getElementById("half");
-  collections = [audioEight, audioEight, audioEight, audioHalf, audioEight];
+  let userInput = [];
+  let audioEight = document.getElementById("1");
+  let audioQuarter = document.getElementById("2");
+  let audioHalf = document.getElementById("4");
+  userInput = collections.map(val => {
+    if (val == 1) val = audioEight;
+    else if (val == 2) val = audioQuarter;
+    else val = audioHalf;
+    return val;
+  });
 
-  if (i == collections.length) {
+  if (i == userInput.length) {
     i = 0;
+    collections = [];
+    userInput = [];
     return;
   }
-  collections[i].addEventListener("ended", collectAnswer);
-  collections[i].play();
+  userInput[i].addEventListener("ended", collectAnswer);
+  userInput[i].play();
   i++;
 }
