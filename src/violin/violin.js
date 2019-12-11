@@ -11,9 +11,9 @@ document.getElementById("endpage").style.visibility = "hidden";
  *   3. start the quiz will be triggered by a button.
  * stove, questions and buttons will be shown after the button was clicked
  */
-// let helper;
-// let rightAnswer = 0;
-// let totalQuestion = 0;
+let helper;
+let rightAnswer = 0;
+let totalQuestion = 0;
 
 function randomQuestion() {
   getRandomNumber(randomNumber);
