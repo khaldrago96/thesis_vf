@@ -1,8 +1,8 @@
 // DRAW NOTES
-document.getElementById("buttongr").style.visibility = "hidden";
-document.getElementById("endbtn").style.visibility = "hidden";
-document.getElementById("bar").style.visibility = "hidden";
-document.getElementById("outer-bar").style.visibility = "hidden";
+// document.getElementById("buttongr").style.visibility = "hidden";
+// document.getElementById("endbtn").style.visibility = "hidden";
+// document.getElementById("bar").style.visibility = "hidden";
+// document.getElementById("outer-bar").style.visibility = "hidden";
 document.getElementById("endpage").style.visibility = "hidden";
 /* FUNCTIONALITY LOGICS
  *  below are the functions that are required to:
@@ -150,25 +150,21 @@ let collections = [];
 
 function playEight() {
   let x = document.getElementById("btn-eight");
-  let audioEight = document.getElementById("eight");
   collections.push(x.value);
-  console.log(collections);
 }
 
 function playQuarter() {
   let x = document.getElementById("btn-quarter");
-  let audioQuarter = document.getElementById("quarter");
   collections.push(x.value);
-  console.log(collections);
 }
 
 function playHalf() {
   let x = document.getElementById("btn-half");
-  let audioHalf = document.getElementById("half");
   collections.push(x.value);
-  console.log(collections);
 }
 var i = 0;
+let a = 0;
+let pianoRecord = [];
 function collectAnswer() {
   let userInput = [];
   let audioEight = document.getElementById("1");
@@ -190,4 +186,29 @@ function collectAnswer() {
   userInput[i].addEventListener("ended", collectAnswer);
   userInput[i].play();
   i++;
+}
+
+function piano(x) {
+  let tuts = x.getAttribute("data-key");
+  document.getElementById(tuts).play();
+  pianoRecord.push(tuts);
+}
+
+function playRecorder() {
+  if (a === pianoRecord.length) {
+    a = 0;
+    return;
+  }
+  document
+    .getElementById(pianoRecord[a])
+    .addEventListener("ended", playRecorder);
+  document.getElementById(pianoRecord[a]).play();
+  a++;
+}
+
+function reset() {
+  a = 0;
+  i = 0;
+  collections = [];
+  pianoRecord = [];
 }
