@@ -20,14 +20,6 @@
             <h3 style="text-align: center;margin-top: 50px;">VIOLIN SECTION</h3>
             <div class="music-note" id="boo"></div>
 
-            <!-- <div class="music-note" id="buttongr">
-                <button class="btn btn-primary btnx" id="b1" onclick="checkAnswer(this)"></button>
-                <button class="btn btn-primary btnx" id="b2" onclick="checkAnswer(this)"></button>
-                <button class="btn btn-primary btnx" id="b3" onclick="checkAnswer(this)"></button>
-                <button class="btn btn-primary btnx" id="b4" onclick="checkAnswer(this)"></button>
-            </div> -->
-            <p id="hint" style="text-align: center;color: green;"> </p>
-
             <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" class="note"
                 onclick="playEight()" value="1">
             <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png" class="note"
@@ -44,48 +36,43 @@
             <audio id="4">
                 <source src="../../resources/audio file/g4half.mp3" type="audio/mpeg">
             </audio>
+
             <button onclick="collectAnswer()">PLAY</button>
-            <div>
-                <ul class="set">
-                    <li class="white b" data-key="65" onclick="piano(this)">c</li>
-                    <li class="black as"></li>
-                    <li class="white a" data-key="83" id="d" onclick="piano(this)"></li>
-                    <li class="black gs"></li>
-                    <li class="white g" data-key="68" id="e" onclick="piano(this)"></li>
-                    <li class="black fs"></li>
-                    <li class="white f" data-key="70" id="f" onclick="piano(this)"></li>
-                    <li class="white e" data-key="71" id="g" onclick="piano(this)"></li>
-                    <li class="black ds"></li>
-                    <li class="white d" data-key="72" id="a" onclick="piano(this)"></li>
-                    <li class="black cs"></li>
-                    <li class="white c" data-key="74" id="b" onclick="piano(this)"></li>
-                </ul>
-                <button onclick="playRecorder()">play piano</button>
 
-                <button onclick="reset()">reset</button>
-            </div>
-            <!-- <button class="btn btn-info" onclick="startEasyScore()" id="startbtn"> start</button>
-            <div class="w3-light-grey" id="outer-bar">
-                <div id="bar" class="w3-container w3-center" style="width:25%"></div>
-            </div>
-            <div class="text-right" style="margin-top: 50px;" id="endbtn">
-                <button class="btn  btn-outline-danger" onclick="endSession()">end session</button>
-                <button class="btn btn-success" onclick="startEasyScore()" id="nextbtn">next question</button>
-            </div> -->
+            <ul id="piano">
+                <li data-note="C4" class="key">
+                    <div data-note="C#4" class="black-key"></div>
+                    C
+                </li>
+                <li data-note="D4" class="key">
+                    <div data-note="D#4" class="black-key"></div>
+                    D
+                </li>
+                <li data-note="E4" class="key">
+                    E
+                </li>
+                <li data-note="F4" class="key">
+                    <div data-note="F#4" class="black-key"></div>
+                    F
+                </li>
+                <li data-note="G4" class="key">
+                    <div data-note="G#4" class="black-key"></div>
+                    G
+                </li>
+                <li data-note="A4" class="key">
+                    <div data-note="A#4" class="black-key"></div>
+                    A
+                </li>
+                <li data-note="B4" class="key">
+                    B
+                </li>
+                <li data-note="C5" class="key">
+                    C5
+                </li>
+            </ul>
         </div>
 
-        <div id="endpage">
-            <h3 style="text-align: center;">SESSION SUMMARY - VIOLIN</h3>
-            <br>
-            <h2 style="text-align: center;"><b id="total"></b></h2>
-            <h4 style="text-align: center;"><b id="total2"></b></h4>
-            <div style="position:absolute;left: 45%;">
-                <button class="btn btn-primary" onclick="location.href='violin.html'">
-                </button>
-            </div>
-        </div>
     </div>
-    <button onclick="playasdf()"> click</button>
 
     <audio data-key="65" id="65" src="../../resources/audio file/piano/040-c.wav"></audio>
     <audio data-key="83" id="83" src="../../resources/audio file/piano/042-d.wav"></audio>
@@ -95,8 +82,10 @@
     <audio data-key="72" id="72" src="../../resources/audio file/piano/049-a.wav"></audio>
     <audio data-key="74" id="74" src="../../resources/audio file/piano/051-b.wav"></audio>
     <audio data-key="75" id="75" src="../../resources/audio file/piano/052-c2.wav"></audio>
+
+
 </body>
-<p></p>
+<script src="./tone.js"></script>
 <script src="../../node_modules\vexflow\releases\vexflow-debug.js"></script>
 <script src="../violin/violin.js"></script>
 

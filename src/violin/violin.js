@@ -1,16 +1,20 @@
-// DRAW NOTES
-// document.getElementById("buttongr").style.visibility = "hidden";
-// document.getElementById("endbtn").style.visibility = "hidden";
-// document.getElementById("bar").style.visibility = "hidden";
-// document.getElementById("outer-bar").style.visibility = "hidden";
-document.getElementById("endpage").style.visibility = "hidden";
-/* FUNCTIONALITY LOGICS
- *  below are the functions that are required to:
- *   1. get a random number for question
- *   2. algorithm for change the solution sequence
- *   3. start the quiz will be triggered by a button.
- * stove, questions and buttons will be shown after the button was clicked
- */
+/*
+  Buttons for rhytm training
+*/
+const synth = new Tone.Synth();
+// synth.oscillator.type = "sine";
+synth.toMaster();
+
+const piano = document.getElementById("piano");
+
+piano.addEventListener("mousedown", e => {
+  synth.triggerAttackRelease(e.target.dataset.note);
+});
+
+piano.addEventListener("mouseup", e => {
+  synth.triggerRelease();
+});
+
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
@@ -37,14 +41,6 @@ function getRandomNumber(questionNr) {
 }
 
 function startEasyScore() {
-  document.getElementById("buttongr").style.visibility = "visible";
-  document.getElementById("endbtn").style.visibility = "visible";
-  document.getElementById("startbtn").style.display = "none";
-  document.getElementById("bar").style.visibility = "visible";
-  document.getElementById("outer-bar").style.visibility = "visible";
-  document.getElementById("boo").innerHTML = "";
-  document.getElementById("nextbtn").disabled = true;
-  document.getElementById("hint").innerHTML = "";
   let randomNumber = Math.floor(Math.random() * questionArray.length + 1);
   console.log("randomNumber :", randomNumber);
   getRandomNumber(randomNumber);
@@ -70,16 +66,6 @@ function startEasyScore() {
   totalQuestion++;
 }
 
-function movebar() {
-  var elem = document.getElementById("bar");
-  elem.style.width = totalQuestion * 10 + "%";
-  elem.innerHTML = totalQuestion * 10 + "%";
-  if (totalQuestion === 10)
-    setTimeout(() => {
-      endSession();
-    }, 1500);
-}
-
 function checkAnswer(button) {
   document.getElementById("nextbtn").disabled = false;
   console.log(helper);
@@ -98,18 +84,6 @@ function checkAnswer(button) {
     document.getElementById("hint").style.color = "red";
     document.getElementById("hint").innerHTML = "Right answer: " + x.charAt(0);
   }
-  console.log("rightAnswer :", rightAnswer);
-  console.log("totalQuestion: ", totalQuestion);
-}
-
-function endSession() {
-  console.log("object");
-  document.getElementById("cont").style.display = "none";
-  document.getElementById("endpage").style.visibility = "visible";
-  let score = Math.round((rightAnswer / totalQuestion) * 100);
-  document.getElementById("total").innerHTML = score + "%";
-  document.getElementById("total2").innerHTML =
-    "Correct answers " + rightAnswer + "/" + totalQuestion;
 }
 
 const questionArray = [
@@ -188,11 +162,11 @@ function collectAnswer() {
   i++;
 }
 
-function piano(x) {
-  let tuts = x.getAttribute("data-key");
-  document.getElementById(tuts).play();
-  pianoRecord.push(tuts);
-}
+// function piano(x) {
+//   let tuts = x.getAttribute("data-key");
+//   document.getElementById(tuts).play();
+//   pianoRecord.push(tuts);
+// }
 
 function playRecorder() {
   if (a === pianoRecord.length) {
@@ -212,3 +186,66 @@ function reset() {
   collections = [];
   pianoRecord = [];
 }
+
+// const synth = new Tone.Synth();
+// synth.oscillator.type = "sine";
+// synth.toMaster();
+
+// const piano = document.getElementById("piano");
+
+// piano.addEventListener("mousedown", e => {
+//   synth.triggerAttack(e.target.dataset.note);
+// });
+
+// piano.addEventListener("mouseup", e => {
+//   synth.triggerRelease();
+// });
+
+// document.addEventListener("keydown", e => {
+//   switch (e.key) {
+//     case "d":
+//       return synth.triggerAttack("C4");
+//     case "r":
+//       return synth.triggerAttack("C#4");
+//     case "f":
+//       return synth.triggerAttack("D4");
+//     case "t":
+//       return synth.triggerAttack("D#4");
+//     case "g":
+//       return synth.triggerAttack("E4");
+//     case "h":
+//       return synth.triggerAttack("F4");
+//     case "u":
+//       return synth.triggerAttack("F#4");
+//     case "j":
+//       return synth.triggerAttack("G4");
+//     case "i":
+//       return synth.triggerAttack("G#4");
+//     case "k":
+//       return synth.triggerAttack("A4");
+//     case "o":
+//       return synth.triggerAttack("A#4");
+//     case "l":
+//       return synth.triggerAttack("B4");
+//     default:
+//       return;
+//   }
+// });
+
+// document.addEventListener("keyup", e => {
+//   switch (e.key) {
+//     case "d":
+//     case "r":
+//     case "f":
+//     case "t":
+//     case "g":
+//     case "h":
+//     case "u":
+//     case "j":
+//     case "i":
+//     case "k":
+//     case "o":
+//     case "l":
+//        synth.triggerRelease();
+//   }
+// });
