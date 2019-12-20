@@ -18,8 +18,10 @@ let audioFiles = [
 let pianoBuzz = document.getElementById("piano");
 
 pianoBuzz.addEventListener("mousedown", e => {
-  let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
-  playSound.play();
+  if (e.target.dataset.note !== "100") {
+    let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
+    playSound.play();
+  }
 });
 
 /*
