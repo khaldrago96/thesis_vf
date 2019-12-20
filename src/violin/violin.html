@@ -15,31 +15,68 @@
 
 <body>
 
-    <div class="container">
-        <div id="cont">
-            <h3 style="text-align: center;margin-top: 50px;">VIOLIN SECTION</h3>
+    <div class="container" style="margin-top: 40px;">
+        <div id="cont" style="margin-top: 40px;margin-left: 30px;">
             <div class="music-note" id="boo"></div>
+            <div>
+                <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" class="note"
+                    onclick="playEight()" value="1">
+                <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png" class="note"
+                    onclick="playQuarter()" value="2">
+                <input type="image" id="btn-half" src="../../resources/images/half.png" class="note"
+                    onclick="playHalf()" value="4">
 
-            <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" class="note"
-                onclick="playEight()" value="1">
-            <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png" class="note"
-                onclick="playQuarter()" value="2">
-            <input type="image" id="btn-half" src="../../resources/images/half.png" class="note" onclick="playHalf()"
-                value="4">
+                <audio id="1">
+                    <source src="../../resources/audio file/g4eight.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="2">
+                    <source src="../../resources/audio file/g4quarter.mp3" type="audio/mpeg">
+                </audio>
+                <audio id="4">
+                    <source src="../../resources/audio file/g4half.mp3" type="audio/mpeg">
+                </audio>
 
-            <audio id="1">
-                <source src="../../resources/audio file/g4eight.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="2">
-                <source src="../../resources/audio file/g4quarter.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="4">
-                <source src="../../resources/audio file/g4half.mp3" type="audio/mpeg">
-            </audio>
+                <button onclick="collectAnswer()">PLAY</button>
+            </div>
+            <hr>
+            <div>
+                <h5 style="text-align: center;">BUZZ JS</h5>
+                <ul id="piano" style="margin-top:30px;background: salmon;">
+                    <li data-note="0" class="key">
+                        <div data-note="8" class="black-key">C#</div>
+                        C
+                    </li>
+                    <li data-note="1" class="key">
+                        <div data-note="9" class="black-key">D#</div>
+                        D
+                    </li>
+                    <li data-note="2" class="key">
+                        E
+                    </li>
+                    <li data-note="3" class="key">
+                        <div data-note="10" class="black-key">F#</div>
+                        F
+                    </li>
+                    <li data-note="4" class="key">
+                        <div data-note="11" class="black-key">G#</div>
+                        G
+                    </li>
+                    <li data-note="5" class="key">
+                        <div data-note="12" class="black-key">A#</div>
+                        A
+                    </li>
+                    <li data-note="6" class="key">
+                        B
+                    </li>
+                    <li data-note="7" class="key">
+                        <div class="black-key"></div>
+                        C5
+                    </li>
+                    <li class="key"></li>
+                </ul>
+            </div>
 
-            <button onclick="collectAnswer()">PLAY</button>
-
-            <ul id="piano">
+            <ul id="piano2">
                 <li data-note="C4" class="key">
                     <div data-note="C#4" class="black-key"></div>
                     C
@@ -74,17 +111,8 @@
 
     </div>
 
-    <audio data-key="65" id="65" src="../../resources/audio file/piano/040-c.wav"></audio>
-    <audio data-key="83" id="83" src="../../resources/audio file/piano/042-d.wav"></audio>
-    <audio data-key="68" id="68" src="../../resources/audio file/piano/044-e.wav"></audio>
-    <audio data-key="70" id="70" src="../../resources/audio file/piano/045-f.wav"></audio>
-    <audio data-key="71" id="71" src="../../resources/audio file/piano/047-g.wav"></audio>
-    <audio data-key="72" id="72" src="../../resources/audio file/piano/049-a.wav"></audio>
-    <audio data-key="74" id="74" src="../../resources/audio file/piano/051-b.wav"></audio>
-    <audio data-key="75" id="75" src="../../resources/audio file/piano/052-c2.wav"></audio>
-
-
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
 <script src="./tone.js"></script>
 <script src="../../node_modules\vexflow\releases\vexflow-debug.js"></script>
 <script src="../violin/violin.js"></script>
