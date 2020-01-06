@@ -20,5 +20,4 @@ Final Version will be an app for music learning which adopts the "Perfect Ears" 
     - UI.
     - Functionality : Rhytm training (! Rhytm Input !)
 <br/>
-
-
+?? Development time to time
