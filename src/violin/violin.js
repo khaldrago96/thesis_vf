@@ -24,23 +24,6 @@ pianoBuzz.addEventListener("mousedown", e => {
   }
 });
 
-/*
-  Piano using ToneJS
-*/
-const synth = new Tone.Synth();
-// synth.oscillator.type = "sine";
-synth.toMaster();
-
-const piano = document.getElementById("piano2");
-
-piano.addEventListener("mousedown", e => {
-  synth.triggerAttackRelease(e.target.dataset.note);
-});
-
-piano.addEventListener("mouseup", e => {
-  synth.triggerRelease();
-});
-
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
