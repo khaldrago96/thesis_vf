@@ -52,9 +52,9 @@ function draw() {
 
             function drawSmallCircle() {
                 translate(radius - margin / 2, 0);
-                strokeWeight(3);
+                strokeWeight(2);
                 fill(255);
-                ellipse(0, 0, 30, 30);
+                ellipse(0, 0, 25, 25);
             }
 
             drawLargeCircle();

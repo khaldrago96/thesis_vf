@@ -1,0 +1,23 @@
+custom metronome
+
+var startMetronome = true;
+function playMetronome() {
+  document.getElementById("metronome").addEventListener("ended", playMetronome);
+  if (startMetronome) {
+    setTimeout(() => {
+      document.getElementById("metronome").play();
+    }, 750);
+  } else return;
+}
+
+function stop() {
+  startMetronome = false;
+}
+
+html custom metronome
+
+<button onclick="playMetronome()"> start metronome </button>
+    <audio id="metronome">
+        <source src="../../resources/audio file/metronome.wav" type="audio/mpeg">
+    </audio>
+<button onclick="stop()">stop</button>

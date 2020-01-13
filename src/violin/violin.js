@@ -16,14 +16,6 @@ let audioFiles = [
   "../../resources/audio file/piano/050-ax.wav"
 ];
 let pianoBuzz = document.getElementById("piano");
-
-// pianoBuzz.addEventListener("mousedown", e => {
-//   if (e.target.dataset.note !== "100") {
-//     let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
-//     playSound.play();
-//   }
-// });
-
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
@@ -88,8 +80,6 @@ function checkAnswer(button) {
     document.getElementById("hint").style.color = "green";
     document.getElementById("hint").innerHTML = "Right Answer!";
   } else {
-    // document.getElementById(button.id.toString()).style.backgroundColor = "red";
-
     document.getElementById("hint").style.color = "red";
     document.getElementById("hint").innerHTML = "Right answer: " + x.charAt(0);
   }
@@ -181,18 +171,4 @@ function playRecorder() {
     .addEventListener("ended", playRecorder);
   document.getElementById(pianoRecord[a]).play();
   a++;
-}
-
-var startMetronome = true;
-function playMetronome() {
-  document.getElementById("metronome").addEventListener("ended", playMetronome);
-  if (startMetronome) {
-    setTimeout(() => {
-      document.getElementById("metronome").play();
-    }, 750);
-  } else return;
-}
-
-function stop() {
-  startMetronome = false;
 }

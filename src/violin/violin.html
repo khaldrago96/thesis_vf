@@ -43,13 +43,6 @@
 
             <!-- ---------------------------------------------------------------------------- -->
             <!-- METRONOME -->
-            <button onclick="playMetronome()"> start metronome </button>
-            <audio id="metronome">
-                <source src="../../resources/audio file/metronome.wav" type="audio/mpeg">
-            </audio>
-            <button onclick="stop()">stop</button>
-
-            <!-- <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;"> -->
             <br><br>
             <div>
                 <div class="row">
@@ -59,18 +52,6 @@
                             <input id="tempo" class='form-control' type="number" value='80' min='20' max='180'
                                 onChange="metronomeApp.setTempo(this.value);">
                         </div>
-                        <div class="form-group">
-                            <label for="metroSound">Sound</label>
-                            <select id="metroSound" class="form-control"
-                                onChange="metronomeApp.setSound(this.selectedIndex + 1)">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="visType">Visualization</label>
-                            <select id="visType" class="form-control"
-                                onChange="metronomeApp.setVisualization(this.selectedIndex)">
-                            </select>
-                        </div>
                         <input id="metronome" class="form-control btn btn-secondary" type="button" value="Start"
                             onclick="metronomeApp.toggle()" />
                     </div>
@@ -78,10 +59,11 @@
                     </div>
                 </div>
             </div>
-
+            <br><br>
+            <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
             <!-- ---------------------------------------------------------------------------- -->
             <!-- PIANO -->
-            <!-- <div>
+            <div>
                 <h5 style="text-align: center;">BUZZ JS</h5>
                 <ul id="piano" style="margin-top:30px;background: salmon;">
                     <li data-note="0" class="key">
@@ -117,10 +99,10 @@
                     <li data-note="100" class="key"></li>
                 </ul>
             </div>
-        </div> -->
-            <!-- xx -->
-
         </div>
+        <!-- xx -->
+
+    </div>
     </div>
 
 </body>

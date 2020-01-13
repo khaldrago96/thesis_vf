@@ -5,7 +5,7 @@ class MetronomeSound {
         const dummyListener = { setTempo: (t) => { }, setStartTime: (t) => { } };
         this.listener = listener || dummyListener;
         this.running = false;
-        this.tempoBpm = 80;
+        this.tempoBpm = 80; // set default to 80 bpm instead of 60bpm
         this.soundNum = 1;
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const urls = sounds.map(name => this.soundsPath + name);
