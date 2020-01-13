@@ -38,8 +38,26 @@
 
                 <button onclick="collectAnswer()">PLAY</button>
             </div>
-            <hr>
-            <div>
+            <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
+
+            <!-- ---------------------------------------------------------------------------- -->
+            <!-- METRONOME -->
+            <button onclick="playMetronome()"> start metronome </button>
+            <audio id="metronome">
+                <source src="../../resources/audio file/metronome.wav" type="audio/mpeg">
+            </audio>
+            <button onclick="stop()">stop</button>
+
+            <!-- <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;"> -->
+
+
+
+
+
+
+            <!-- ---------------------------------------------------------------------------- -->
+            <!-- PIANO -->
+            <!-- <div>
                 <h5 style="text-align: center;">BUZZ JS</h5>
                 <ul id="piano" style="margin-top:30px;background: salmon;">
                     <li data-note="0" class="key">
@@ -75,8 +93,10 @@
                     <li data-note="100" class="key"></li>
                 </ul>
             </div>
+        </div> -->
+            <!-- xx -->
+
         </div>
-    </div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>

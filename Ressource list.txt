@@ -1,0 +1,17 @@
+
+Audio Files for the piano
+	https://carolinegabriel.com/javascript-piano/
+
+Tones audio files
+	using an app called 'Piano', which will be recorded with an iPad and edited with Audacity
+
+Metronome audio file
+	https://www.findsounds.com/ISAPI/search.dll?keywords=woodblock&keywords=woodblock
+
+Piano Layout
+	https://dev.to/shimphillip/building-a-piano-with-tone-js-5c2f 
+	CSS will be modified
+
+Library:
+	- Buzz JS for Web audio API
+	- Vexflow and Easyscore for representing the tabs

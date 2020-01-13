@@ -17,12 +17,12 @@ let audioFiles = [
 ];
 let pianoBuzz = document.getElementById("piano");
 
-pianoBuzz.addEventListener("mousedown", e => {
-  if (e.target.dataset.note !== "100") {
-    let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
-    playSound.play();
-  }
-});
+// pianoBuzz.addEventListener("mousedown", e => {
+//   if (e.target.dataset.note !== "100") {
+//     let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
+//     playSound.play();
+//   }
+// });
 
 let helper;
 let rightAnswer = 0;
@@ -171,12 +171,6 @@ function collectAnswer() {
   i++;
 }
 
-// function piano(x) {
-//   let tuts = x.getAttribute("data-key");
-//   document.getElementById(tuts).play();
-//   pianoRecord.push(tuts);
-// }
-
 function playRecorder() {
   if (a === pianoRecord.length) {
     a = 0;
@@ -189,9 +183,16 @@ function playRecorder() {
   a++;
 }
 
-function reset() {
-  a = 0;
-  i = 0;
-  collections = [];
-  pianoRecord = [];
+var startMetronome = true;
+function playMetronome() {
+  document.getElementById("metronome").addEventListener("ended", playMetronome);
+  if (startMetronome) {
+    setTimeout(() => {
+      document.getElementById("metronome").play();
+    }, 750);
+  } else return;
+}
+
+function stop() {
+  startMetronome = false;
 }
