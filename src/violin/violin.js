@@ -20,6 +20,12 @@ let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
 
+pianoBuzz.addEventListener("mousedown", e => {
+  if (e.target.dataset.note !== "100") {
+    let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
+    playSound.play();
+  }
+});
 function randomQuestion() {
   getRandomNumber(randomNumber);
   showNote(randomNumber);
