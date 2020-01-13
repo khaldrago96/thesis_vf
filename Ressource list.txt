@@ -7,6 +7,7 @@ Tones audio files
 
 Metronome audio file
 	https://www.findsounds.com/ISAPI/search.dll?keywords=woodblock&keywords=woodblock
+	https://github.com/dcbriccetti/metronome
 
 Piano Layout
 	https://dev.to/shimphillip/building-a-piano-with-tone-js-5c2f 
@@ -15,3 +16,4 @@ Piano Layout
 Library:
 	- Buzz JS for Web audio API
 	- Vexflow and Easyscore for representing the tabs
+	- p5 for animation
