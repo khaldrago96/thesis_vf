@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
     </link>
     <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,20 +19,19 @@
         <div id="cont" style="margin-top: 40px;margin-left: 30px;">
             <div class="music-note" id="boo"></div>
             <div>
-                <input type="image" id="btn-eight" src="../app/assets/images/eigth-note.png" onclick="playEight()"
-                    value="1">
-                <input type="image" id="btn-quarter" src="../app/assets/images/quarter-note.png" onclick="playQuarter()"
+                <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()" value="1">
+                <input type="image" id="btn-quarter" src="assets/images/quarter-note.png" onclick="playQuarter()"
                     value="2">
-                <input type="image" id="btn-half" src="../app/assets/images/half.png" onclick="playHalf()" value="4">
+                <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()" value="4">
 
                 <audio id="1">
-                    <source src="../app/assets/audio/audio file/g4eight.mp3" type="audio/mpeg">
+                    <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
                 </audio>
                 <audio id="2">
-                    <source src="../app/assets/audio/audio file/g4quarter.mp3" type="audio/mpeg">
+                    <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
                 </audio>
                 <audio id="4">
-                    <source src="../app/assets/audio/audio file/g4half.mp3" type="audio/mpeg">
+                    <source src="assets/audio/g4half.mp3" type="audio/mpeg">
                 </audio>
 
                 <button onclick="collectAnswer()">PLAY</button>
@@ -119,7 +118,7 @@
 <script src="js/metronome/visualization.js"></script>
 <script src="js/metronome/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
-<script src="../../node_modules\vexflow\releases\vexflow-debug.js"></script>
-<script src="../violin/violin.js"></script>
+<script src="../node_modules\vexflow\releases\vexflow-debug.js"></script>
+<script src="./violin.js"></script>
 
 </html>
