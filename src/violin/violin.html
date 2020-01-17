@@ -9,8 +9,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
     </link>
-    <link rel="stylesheet" href="../../index.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -20,12 +19,11 @@
         <div id="cont" style="margin-top: 40px;margin-left: 30px;">
             <div class="music-note" id="boo"></div>
             <div>
-                <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" class="note"
-                    onclick="playEight()" value="1">
-                <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png" class="note"
+                <input type="image" id="btn-eight" src="../../resources/images/eigth-note.png" onclick="playEight()"
+                    value="1">
+                <input type="image" id="btn-quarter" src="../../resources/images/quarter-note.png"
                     onclick="playQuarter()" value="2">
-                <input type="image" id="btn-half" src="../../resources/images/half.png" class="note"
-                    onclick="playHalf()" value="4">
+                <input type="image" id="btn-half" src="../../resources/images/half.png" onclick="playHalf()" value="4">
 
                 <audio id="1">
                     <source src="../../resources/audio file/g4eight.mp3" type="audio/mpeg">
@@ -65,7 +63,7 @@
             <!-- PIANO -->
             <div>
                 <h5 style="text-align: center;">BUZZ JS</h5>
-                <ul id="piano" style="margin-top:30px;background: salmon;">
+                <ul id="piano" style="margin-top:30px;">
                     <li data-note="0" class="key">
                         <div data-note="8" class="black-key">C#</div>
                         C
@@ -117,11 +115,10 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-<script src="js/metronome-sound.js"></script>
-<script src="js/visualization.js"></script>
-<script src="js/app.js"></script>
+<script src="js/metronome/metronome-sound.js"></script>
+<script src="js/metronome/visualization.js"></script>
+<script src="js/metronome/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
-<script src="./tone.js"></script>
 <script src="../../node_modules\vexflow\releases\vexflow-debug.js"></script>
 <script src="../violin/violin.js"></script>
 
