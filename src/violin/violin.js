@@ -1,19 +1,19 @@
 /* Testing BuzzJS */
-var mySound = new buzz.sound("../../resources/audio file/piano/040-c.wav");
+// var mySound = new buzz.sound("../app/assets/audio/audio file/piano/040-c.wav");
 let audioFiles = [
-  "../../resources/audio file/piano/040-c.wav",
-  "../../resources/audio file/piano/042-d.wav",
-  "../../resources/audio file/piano/044-e.wav",
-  "../../resources/audio file/piano/045-f.wav",
-  "../../resources/audio file/piano/047-g.wav",
-  "../../resources/audio file/piano/049-a.wav",
-  "../../resources/audio file/piano/051-b.wav",
-  "../../resources/audio file/piano/052-c2.wav",
-  "../../resources/audio file/piano/041-cx.wav",
-  "../../resources/audio file/piano/043-dx.wav",
-  "../../resources/audio file/piano/046-fx.wav",
-  "../../resources/audio file/piano/048-gx.wav",
-  "../../resources/audio file/piano/050-ax.wav"
+  "../app/assets/audio/audio file/piano/040-c.wav",
+  "../app/assets/audio/audio file/piano/042-d.wav",
+  "../app/assets/audio/audio file/piano/044-e.wav",
+  "../app/assets/audio/audio file/piano/045-f.wav",
+  "../app/assets/audio/audio file/piano/047-g.wav",
+  "../app/assets/audio/audio file/piano/049-a.wav",
+  "../app/assets/audio/audio file/piano/051-b.wav",
+  "../app/assets/audio/audio file/piano/052-c2.wav",
+  "../app/assets/audio/audio file/piano/041-cx.wav",
+  "../app/assets/audio/audio file/piano/043-dx.wav",
+  "../app/assets/audio/audio file/piano/046-fx.wav",
+  "../app/assets/audio/audio file/piano/048-gx.wav",
+  "../app/assets/audio/audio file/piano/050-ax.wav"
 ];
 let pianoBuzz = document.getElementById("piano");
 let helper;
