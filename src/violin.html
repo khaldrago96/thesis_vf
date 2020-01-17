@@ -9,7 +9,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
     </link>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./app.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -62,7 +62,7 @@
             <!-- PIANO -->
             <div>
                 <h5 style="text-align: center;">BUZZ JS</h5>
-                <ul id="piano" style="margin-top:30px;">
+                <ul id="piano" style="margin-top:30px;" data-note="100">
                     <li data-note="0" class="key">
                         <div data-note="8" class="black-key">C#</div>
                         C
@@ -97,8 +97,6 @@
                 </ul>
             </div>
         </div>
-        <!-- xx -->
-
     </div>
     </div>
 
@@ -119,6 +117,6 @@
 <script src="js/metronome/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.1/buzz.min.js"></script>
 <script src="../node_modules\vexflow\releases\vexflow-debug.js"></script>
-<script src="./violin.js"></script>
+<script src="js/violin.js"></script>
 
 </html>
