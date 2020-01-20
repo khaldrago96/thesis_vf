@@ -155,7 +155,6 @@ function collectAnswer() {
     else val = audioHalf;
     return val;
   });
-
   if (i == userInput.length) {
     i = 0;
     collections = [];
@@ -167,14 +166,76 @@ function collectAnswer() {
   i++;
 }
 
-function playRecorder() {
-  if (a === pianoRecord.length) {
-    a = 0;
-    return;
+// App Interval Identification
+// unison = 0,major second = 1, minor second = 2,
+/*
+ 0. Unison C - 0
+ 1. Major E F - 2
+ 2. Minor A# B - 1
+ 3. Minor D D# - 1
+ 4. Unison E - 0
+ 5. Major B C5 - 2
+ 6. Minor G G# - 1
+
+ option a b c
+*/
+
+//exercises: index of audioFiles
+let intervalAppDb = [
+  { s: "unison", q: [0, 0], startKey: "C" },
+  { s: "major", q: [2, 3], startKey: "E" },
+  { s: "minor", q: [7, 12], startKey: "A#" },
+  { s: "minor", q: [9, 1], startKey: "D" },
+  { s: "unison", q: [2, 2], startKey: "E" },
+  { s: "major", q: [7, 6], startKey: "B" },
+  { s: "minor", q: [4, 11], startKey: "G" }
+];
+
+var intervalAppIndex = 0;
+var trueAnswer = 0;
+
+function createQuestion() {
+  let indexToPlay = intervalAppDb[intervalAppIndex];
+  let x = new buzz.sound(audioFiles[indexToPlay.q[0]]);
+  let y = new buzz.sound(audioFiles[indexToPlay.q[1]]);
+  document.getElementById("hint").innerHTML =
+    "First key to be played: " + indexToPlay.startKey;
+  x.play();
+  setTimeout(() => {
+    y.play();
+  }, 600);
+}
+
+let indicator = document.getElementById("indicator");
+function checkIntervalAppAnswer(clickedBtn) {
+  let answer = intervalAppDb[intervalAppIndex].s;
+  let correctInput = document.getElementById(clickedBtn.id);
+  if (clickedBtn.id === answer) {
+    trueAnswer++;
+    indicator.style.color = "green";
+    indicator.innerHTML = "Correct!";
+    correctInput.classList.add("btn-success");
+    correctInput.classList.remove("btn-info");
+  } else {
+    indicator.style.color = "red";
+    indicator.innerHTML = "Wrong!";
+    correctInput.classList.add("btn-danger");
+    document.getElementById(answer).classList.remove("btn-info");
+    document.getElementById(answer).classList.add("btn-success");
   }
-  document
-    .getElementById(pianoRecord[a])
-    .addEventListener("ended", playRecorder);
-  document.getElementById(pianoRecord[a]).play();
-  a++;
+}
+
+function nextQ() {
+  let items = document.querySelectorAll(".a");
+  indicator.innerHTML = "";
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove("btn-success", "btn-danger");
+    items[i].classList.add("btn-info");
+  }
+  intervalAppIndex.length === intervalAppDb.length
+    ? (intervalAppIndex = intervalAppDb.length - 1)
+    : intervalAppIndex++;
+  setTimeout(() => {
+    createQuestion();
+  }, 500);
 }
