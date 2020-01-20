@@ -216,12 +216,14 @@ function checkIntervalAppAnswer(clickedBtn) {
     indicator.innerHTML = "Correct!";
     correctInput.classList.add("btn-success");
     correctInput.classList.remove("btn-info");
+    new buzz.sound("./assets/audio/right-answer.mp3").play();
   } else {
     indicator.style.color = "red";
     indicator.innerHTML = "Wrong!";
     correctInput.classList.add("btn-danger");
     document.getElementById(answer).classList.remove("btn-info");
     document.getElementById(answer).classList.add("btn-success");
+    new buzz.sound("./assets/audio/wrong-answer.mp3").play();
   }
 }
 
