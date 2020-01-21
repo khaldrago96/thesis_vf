@@ -8,6 +8,12 @@ html {
  width: 100%;
 }
 
+.button-navigation {
+ margin-top: 30px;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+}
 .container {
  height: 800px !important;
  background-color: #e3f2fd !important;
