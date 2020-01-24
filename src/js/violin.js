@@ -171,7 +171,7 @@ function collectAnswer() {
 /*
  0. Unison C - 0
  1. Major E F - 2
- 2. Minor A# B - 1
+ 2. Major A# B - 2
  3. Minor D D# - 1
  4. Unison E - 0
  5. Major B C5 - 2
@@ -184,7 +184,7 @@ function collectAnswer() {
 let intervalAppDb = [
   { s: "unison", q: [0, 0], startKey: "C" },
   { s: "major", q: [2, 3], startKey: "E" },
-  { s: "minor", q: [7, 12], startKey: "A#" },
+  { s: "major", q: [7, 12], startKey: "A#" },
   { s: "minor", q: [9, 1], startKey: "D" },
   { s: "unison", q: [2, 2], startKey: "E" },
   { s: "major", q: [7, 6], startKey: "B" },
@@ -240,4 +240,17 @@ function nextQ() {
   setTimeout(() => {
     createQuestion();
   }, 500);
+}
+
+function showApp(appId) {
+  console.log(appId.id);
+  let app1 = document.getElementById("appRI");
+  let app2 = document.getElementById("appII");
+  if (appId.id === "RI") {
+    app1.classList.remove("hideApp");
+    app2.classList.add("hideApp");
+  } else {
+    app2.classList.remove("hideApp");
+    app1.classList.add("hideApp");
+  }
 }

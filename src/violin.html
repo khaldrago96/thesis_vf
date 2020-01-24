@@ -15,110 +15,112 @@
 </head>
 
 <body>
-
     <div class="container" style="margin-top: 40px;">
         <div class="button-navigation">
-            <button class="btn btn-dark">Rhytm Input</button>
-            <button class="btn btn-dark">Rhytm Tapping</button>
-            <button class="btn btn-dark">Interval Identification</button>
+            <button class="btn btn-dark" onclick="showApp(this)" id="RI">Rhytm Input</button>
+            <button class="btn btn-dark" onclick="showApp(this)" id="RT">Rhytm Tapping</button>
+            <button class="btn btn-dark" onclick="showApp(this)" id="II">Interval Identification</button>
         </div>
-        <h2 style="text-align: center; margin-top: 10px; color:crimson;">App : App Name </h2 s>
+        <!-- <h2 style="text-align: center; margin-top: 10px; color:crimson;">App : App Name </h2> -->
         <div id="cont" style="margin-top: 40px;margin-left: 30px;">
             <div class="music-note" id="boo"></div>
-            <div>
-                <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()" value="1">
-                <input type="image" id="btn-quarter" src="assets/images/quarter-note.png" onclick="playQuarter()"
-                    value="2">
-                <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()" value="4">
+            <div id="appRI">
+                <div>
+                    <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()"
+                        value="1">
+                    <input type="image" id="btn-quarter" src="assets/images/quarter-note.png" onclick="playQuarter()"
+                        value="2">
+                    <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()" value="4">
 
-                <audio id="1">
-                    <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
-                </audio>
-                <audio id="2">
-                    <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
-                </audio>
-                <audio id="4">
-                    <source src="assets/audio/g4half.mp3" type="audio/mpeg">
-                </audio>
+                    <audio id="1">
+                        <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
+                    </audio>
+                    <audio id="2">
+                        <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
+                    </audio>
+                    <audio id="4">
+                        <source src="assets/audio/g4half.mp3" type="audio/mpeg">
+                    </audio>
 
-                <button onclick="collectAnswer()">PLAY</button>
-            </div>
-            <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
+                    <button onclick="collectAnswer()">PLAY</button>
+                </div>
+                <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
 
-            <!-- ---------------------------------------------------------------------------- -->
-            <!-- METRONOME -->
-            <br><br>
-            <div>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="form-group">
-                            <label for="tempo">Tempo</label>
-                            <input id="tempo" class='form-control' type="number" value='80' min='20' max='180'
-                                onChange="metronomeApp.setTempo(this.value);">
+                <!-- ---------------------------------------------------------------------------- -->
+                <!-- METRONOME -->
+                <br><br>
+                <div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="tempo">Tempo</label>
+                                <input id="tempo" class='form-control' type="number" value='80' min='20' max='180'
+                                    onChange="metronomeApp.setTempo(this.value);">
+                            </div>
+                            <input id="metronome" class="form-control btn btn-secondary" type="button" value="Start"
+                                onclick="metronomeApp.toggle()" />
                         </div>
-                        <input id="metronome" class="form-control btn btn-secondary" type="button" value="Start"
-                            onclick="metronomeApp.toggle()" />
-                    </div>
-                    <div id='visualization' class="col-sm">
+                        <div id='visualization' class="col-sm">
+                        </div>
                     </div>
                 </div>
             </div>
-            <br><br>
-            <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
             <!-- ---------------------------------------------------------------------------- -->
             <!-- exercises and button  -->
-            <br>
-            <p id="hint"></p>
-            <p id="indicator"></p>
-            <div style="display: flex; flex-direction: row; justify-content: space-around;" id="appInterval">
-                <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
-                    id="unison">Unison</button>
-                <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
-                    Second</button>
-                <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
-                    Second</button>
-            </div><br><br>
+            <div id="appII" class="hideApp">
+                <br>
+                <p id="hint"></p>
+                <p id="indicator"></p>
+                <div style="display: flex; flex-direction: row; justify-content: space-around;" id="appInterval">
+                    <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
+                        id="unison">Unison</button>
+                    <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
+                        Second</button>
+                    <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
+                        Second</button>
+                </div><br><br>
 
-            <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
-            <button class="btn btn-dark" onclick="nextQ()">next</button>
-            <br>
+                <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
+                <button class="btn btn-dark" onclick="nextQ()">next</button>
+                <br>
 
-            <!-- PIANO -->
-            <div>
-                <h5 style="text-align: center;">BUZZ JS</h5>
-                <ul id="piano" style="margin-top:30px;" data-note="100">
-                    <li data-note="0" id="0" class="key">
-                        <div data-note="8" class="black-key">C#</div>
-                        C
-                    </li>
-                    <li data-note="1" class="key">
-                        <div data-note="9" class="black-key">D#</div>
-                        D
-                    </li>
-                    <li data-note="2" class="key">
-                        E
-                    </li>
-                    <li data-note="3" class="key">
-                        <div data-note="10" class="black-key">F#</div>
-                        F
-                    </li>
-                    <li data-note="4" class="key">
-                        <div data-note="11" class="black-key">G#</div>
-                        G
-                    </li>
-                    <li data-note="5" class="key">
-                        <div data-note="12" class="black-key">A#</div>
-                        A
-                    </li>
-                    <li data-note="6" class="key">
-                        B
-                    </li>
-                    <li data-note="7" class="key">
-                        <div data-note="100" class="black-key"></div>
-                        C5
-                    </li>
-                    <li data-note="100" class="key"></li>
-                </ul>
+                <!-- PIANO -->
+                <div>
+                    <h5 style="text-align: center;">BUZZ JS</h5>
+                    <ul id="piano" style="margin-top:30px;" data-note="100">
+                        <li data-note="0" id="0" class="key">
+                            <div data-note="8" class="black-key">C#</div>
+                            C
+                        </li>
+                        <li data-note="1" class="key">
+                            <div data-note="9" class="black-key">D#</div>
+                            D
+                        </li>
+                        <li data-note="2" class="key">
+                            E
+                        </li>
+                        <li data-note="3" class="key">
+                            <div data-note="10" class="black-key">F#</div>
+                            F
+                        </li>
+                        <li data-note="4" class="key">
+                            <div data-note="11" class="black-key">G#</div>
+                            G
+                        </li>
+                        <li data-note="5" class="key">
+                            <div data-note="12" class="black-key">A#</div>
+                            A
+                        </li>
+                        <li data-note="6" class="key">
+                            B
+                        </li>
+                        <li data-note="7" class="key">
+                            <div data-note="100" class="black-key"></div>
+                            C5
+                        </li>
+                        <li data-note="100" class="key"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
