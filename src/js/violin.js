@@ -26,26 +26,6 @@ pianoBuzz.addEventListener("mousedown", e => {
     playSound.play();
   }
 });
-function randomQuestion() {
-  getRandomNumber(randomNumber);
-  showNote(randomNumber);
-}
-
-function getRandomNumber(questionNr) {
-  buttonRandomController = questionArray[questionNr - 1].l;
-  while (buttonRandomController.length !== 4) {
-    let x = Math.floor(Math.random() * 4);
-    if (
-      !buttonRandomController.includes(x) ||
-      buttonRandomController.length === 0
-    )
-      buttonRandomController.push(x);
-  }
-  for (let i = 1; i < buttonRandomController.length + 1; i++) {
-    document.getElementById("b" + i).innerHTML = buttonRandomController[i - 1];
-  }
-  buttonRandomController = null;
-}
 
 function startEasyScore() {
   let randomNumber = Math.floor(Math.random() * questionArray.length + 1);
@@ -71,99 +51,6 @@ function startEasyScore() {
 
   movebar();
   totalQuestion++;
-}
-
-function checkAnswer(button) {
-  document.getElementById("nextbtn").disabled = false;
-  console.log(helper);
-  //   console.log(id.innerHTML);
-  console.log(button);
-  let x = questionArray[helper - 1].a;
-  console.log("x :", x.charAt(0));
-  if (button.innerHTML + "4" === x) {
-    rightAnswer++;
-
-    document.getElementById("hint").style.color = "green";
-    document.getElementById("hint").innerHTML = "Right Answer!";
-  } else {
-    document.getElementById("hint").style.color = "red";
-    document.getElementById("hint").innerHTML = "Right answer: " + x.charAt(0);
-  }
-}
-
-const questionArray = [
-  {
-    a: "C4",
-    l: ["C", "D", "A", "E"]
-  },
-  {
-    a: "D4",
-    l: ["F", "D", "G", "B"]
-  },
-  {
-    a: "G4",
-    l: ["G", "D", "E", "F"]
-  },
-  {
-    a: "B4",
-    l: ["F", "A", "B", "E"]
-  },
-  {
-    a: "A4",
-    l: ["C", "A", "E", "B"]
-  },
-  {
-    a: "C4",
-    l: ["E", "B", "C", "G"]
-  },
-  {
-    a: "F4",
-    l: ["D", "G", "F", "E"]
-  },
-  {
-    a: "E4",
-    l: ["E", "C", "A", "D"]
-  }
-];
-let collections = [];
-
-function playEight() {
-  let x = document.getElementById("btn-eight");
-  collections.push(x.value);
-}
-
-function playQuarter() {
-  let x = document.getElementById("btn-quarter");
-  collections.push(x.value);
-}
-
-function playHalf() {
-  let x = document.getElementById("btn-half");
-  collections.push(x.value);
-}
-var i = 0;
-let a = 0;
-let pianoRecord = [];
-function collectAnswer() {
-  let userInput = [];
-  let audioEight = document.getElementById("1");
-  let audioQuarter = document.getElementById("2");
-  let audioHalf = document.getElementById("4");
-  userInput = collections.map(val => {
-    if (val == 1) val = audioEight;
-    else if (val == 2) val = audioQuarter;
-    else val = audioHalf;
-    return val;
-  });
-  if (i == userInput.length) {
-    i = 0;
-    collections = [];
-    userInput = [];
-    return;
-  }
-  userInput[i].addEventListener("ended", collectAnswer);
-  userInput[i].play();
-  i++;
 }
 
 // App Interval Identification
@@ -242,15 +129,129 @@ function nextQ() {
   }, 500);
 }
 
-function showApp(appId) {
-  console.log(appId.id);
-  let app1 = document.getElementById("appRI");
-  let app2 = document.getElementById("appII");
-  if (appId.id === "RI") {
-    app1.classList.remove("hideApp");
-    app2.classList.add("hideApp");
-  } else {
-    app2.classList.remove("hideApp");
-    app1.classList.add("hideApp");
+// function showApp(appId) {
+//   console.log(appId.id);
+//   let app1 = document.getElementById("appRI");
+//   let app2 = document.getElementById("appII");
+//   if (appId.id === "RI") {
+//     app1.classList.remove("hideApp");
+//     app2.classList.add("hideApp");
+//   } else {
+//     app2.classList.remove("hideApp");
+//     app1.classList.add("hideApp");
+//   }
+// }
+
+// App Rhytm Input
+let i_RI_userInput = [];
+function playEight() {
+  let x = document.getElementById("btn-eight");
+  i_RI_userInput.push(x.value);
+}
+
+function playQuarter() {
+  let x = document.getElementById("btn-quarter");
+  i_RI_userInput.push(x.value);
+}
+
+function playHalf() {
+  let x = document.getElementById("btn-half");
+  i_RI_userInput.push(x.value);
+}
+var i = 0;
+let pianoRecord = [];
+function collectAnswer() {
+  let userInput = [];
+  let audioEight = document.getElementById("1");
+  let audioQuarter = document.getElementById("2");
+  let audioHalf = document.getElementById("4");
+  userInput = i_RI_userInput.map(val => {
+    if (val == 1) val = audioEight;
+    else if (val == 2) val = audioQuarter;
+    else val = audioHalf;
+    return val;
+  });
+  if (i == userInput.length) {
+    i = 0;
+    // i_RI_userInput = [];
+    // userInput = [];
+    return;
   }
+  userInput[i].addEventListener("ended", collectAnswer);
+  userInput[i].play();
+  i++;
+  console.log(userInput);
+}
+//App Rhytm Input Exercises
+let rhytmInputDb = [
+  { q: [4, 4] },
+  { q: [2, 1, 1, 1, 1, 2] },
+  { q: [1, 1, 2, 4] },
+  { q: [2, 4, 1, 1] },
+  { q: [4, 2, 2] },
+  { q: [1, 1, 2, 2, 2] },
+  { q: [2, 2, 1, 1, 2] },
+  { q: [1, 1, 2, 1, 1, 1, 1] }
+];
+var questionPlayer = 0;
+let questionRI;
+let indexRIQuestion = 0;
+function repeatQuestion() {
+  questionRI = rhytmInputDb[indexRIQuestion].q;
+  let newQRI = rhytmInputDb[indexRIQuestion].q;
+
+  newQRI = newQRI.map(val => {
+    if (val == 1) val = document.getElementById("1");
+    else if (val == 2) val = document.getElementById("2");
+    else val = document.getElementById("4");
+    return val;
+  });
+  if (questionPlayer == newQRI.length) {
+    questionPlayer = 0;
+    // newQRI = [];
+    return;
+  }
+  newQRI[questionPlayer].addEventListener("ended", repeatQuestion);
+  newQRI[questionPlayer].play();
+  questionPlayer++;
+}
+var startMetronome = true;
+function playMetronome() {
+  document.getElementById("metronome").addEventListener("ended", playMetronome);
+  if (startMetronome) {
+    setTimeout(() => {
+      document.getElementById("metronome").play();
+    }, 750);
+  } else return;
+}
+
+function nextQuestionRI() {
+  indexRIQuestion++;
+  setTimeout(() => {
+    repeatQuestion();
+  }, 750);
+}
+function submitAnswerRI() {
+  let a = 0;
+  // questionRI.map(String);
+
+  console.log(questionRI);
+  console.log(i_RI_userInput);
+  console.log(
+    _.isEqual(
+      questionRI.map(x => {
+        return x.toString();
+      }),
+      i_RI_userInput
+    )
+  );
+  i_RI_userInput = [];
+}
+
+function popAnswer() {
+  if (i_RI_userInput.length > 0) i_RI_userInput.pop();
+  console.log(i_RI_userInput);
+}
+function stop() {
+  startMetronome = false;
 }

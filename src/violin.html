@@ -22,29 +22,35 @@
             <button class="btn btn-dark" onclick="showApp(this)" id="II">Interval Identification</button>
         </div>
         <!-- <h2 style="text-align: center; margin-top: 10px; color:crimson;">App : App Name </h2> -->
-        <div id="cont" style="margin-top: 40px;margin-left: 30px;">
+        <div style="margin-top: 40px;margin-left: 30px;">
             <div class="music-note" id="boo"></div>
             <div id="appRI">
-                <div>
-                    <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()"
-                        value="1">
-                    <input type="image" id="btn-quarter" src="assets/images/quarter-note.png" onclick="playQuarter()"
-                        value="2">
-                    <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()" value="4">
-
-                    <audio id="1">
-                        <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
-                    </audio>
-                    <audio id="2">
-                        <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
-                    </audio>
-                    <audio id="4">
-                        <source src="assets/audio/g4half.mp3" type="audio/mpeg">
-                    </audio>
-
-                    <button onclick="collectAnswer()">PLAY</button>
+                <div style="height: 400px;width: 100%; background: darkkhaki;position: relative;">
+                    <div style="margin-left: 10px;">
+                        <div id="button-container-appRI">
+                            <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()"
+                                value="1">
+                            <input type="image" id="btn-quarter" src="assets/images/quarter-note.png"
+                                onclick="playQuarter()" value="2">
+                            <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()"
+                                value="4">
+                            <input type="image" class="action-delete" id="action-btn" src="assets/images/delete.png"
+                                onclick="popAnswer()">
+                            <button class="btn btn-success" onclick="submitAnswerRI()">Submit</button>
+                            <input type="image" src="assets/images/play.png" class="action-btn" id="action-btn"
+                                onclick="collectAnswer()"></input>
+                        </div>
+                        <div id="action-repeat-next">
+                            <button class="btn btn-light" onclick="repeatQuestion()">Repeat</button>
+                            <button class="btn btn-info" onclick="nextQuestionRI()">next</button>
+                        </div>
+                        <button onclick="playMetronome()"> start metronome </button>
+                        <audio id="metronome">
+                            <source src="/src/assets/audio/metronome.wav" type="audio/mpeg">
+                        </audio>
+                        <button onclick="stop()">stop</button>
+                    </div>
                 </div>
-                <hr style=" border-bottom: 0.1px solid salmon;width: 60vw;">
 
                 <!-- ---------------------------------------------------------------------------- -->
                 <!-- METRONOME -->
@@ -67,7 +73,7 @@
             </div>
             <!-- ---------------------------------------------------------------------------- -->
             <!-- exercises and button  -->
-            <div id="appII" class="hideApp">
+            <div id="appII">
                 <br>
                 <p id="hint"></p>
                 <p id="indicator"></p>
@@ -81,7 +87,7 @@
                 </div><br><br>
 
                 <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
-                <button class="btn btn-dark" onclick="nextQ()">next</button>
+                <button class="btn btn-info" onclick="nextQ()">next</button>
                 <br>
 
                 <!-- PIANO -->
@@ -124,6 +130,17 @@
             </div>
         </div>
     </div>
+
+    <audio id="1">
+        <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="2">
+        <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="4">
+        <source src="assets/audio/g4half.mp3" type="audio/mpeg">
+    </audio>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -135,7 +152,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.core.js"></script>
 <script src="js/metronome/metronome-sound.js"></script>
 <script src="js/metronome/visualization.js"></script>
 <script src="js/metronome/app.js"></script>
