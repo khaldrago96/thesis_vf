@@ -143,45 +143,6 @@ function nextQ() {
 // }
 
 // App Rhytm Input
-let i_RI_userInput = [];
-function playEight() {
-  let x = document.getElementById("btn-eight");
-  i_RI_userInput.push(x.value);
-}
-
-function playQuarter() {
-  let x = document.getElementById("btn-quarter");
-  i_RI_userInput.push(x.value);
-}
-
-function playHalf() {
-  let x = document.getElementById("btn-half");
-  i_RI_userInput.push(x.value);
-}
-var i = 0;
-let pianoRecord = [];
-function collectAnswer() {
-  let userInput = [];
-  let audioEight = document.getElementById("1");
-  let audioQuarter = document.getElementById("2");
-  let audioHalf = document.getElementById("4");
-  userInput = i_RI_userInput.map(val => {
-    if (val == 1) val = audioEight;
-    else if (val == 2) val = audioQuarter;
-    else val = audioHalf;
-    return val;
-  });
-  if (i == userInput.length) {
-    i = 0;
-    // i_RI_userInput = [];
-    // userInput = [];
-    return;
-  }
-  userInput[i].addEventListener("ended", collectAnswer);
-  userInput[i].play();
-  i++;
-  console.log(userInput);
-}
 //App Rhytm Input Exercises
 let rhytmInputDb = [
   { q: [4, 4] },
@@ -193,48 +154,110 @@ let rhytmInputDb = [
   { q: [2, 2, 1, 1, 2] },
   { q: [1, 1, 2, 1, 1, 1, 1] }
 ];
+
 var questionPlayer = 0;
 let questionRI;
 let indexRIQuestion = 0;
-function repeatQuestion() {
-  questionRI = rhytmInputDb[indexRIQuestion].q;
-  let newQRI = rhytmInputDb[indexRIQuestion].q;
+let i_RI_userInput = [];
+var startMetronome = true;
+var metronomeBeats = 0;
+var i = 0;
 
-  newQRI = newQRI.map(val => {
-    if (val == 1) val = document.getElementById("1");
-    else if (val == 2) val = document.getElementById("2");
-    else val = document.getElementById("4");
-    return val;
-  });
-  if (questionPlayer == newQRI.length) {
-    questionPlayer = 0;
-    // newQRI = [];
+function addInput(x) {
+  if (x === 1) i_RI_userInput.push("assets/audio/g4eight.mp3");
+  else if (x === 2) i_RI_userInput.push("assets/audio/g4quarter.mp3");
+  else i_RI_userInput.push("assets/audio/g4half.mp3");
+  console.log(i_RI_userInput);
+}
+
+function collectAnswer() {
+  if (i == i_RI_userInput.length) {
+    i = 0;
     return;
   }
-  newQRI[questionPlayer].addEventListener("ended", repeatQuestion);
-  newQRI[questionPlayer].play();
-  questionPlayer++;
-}
-var startMetronome = true;
-function playMetronome() {
-  document.getElementById("metronome").addEventListener("ended", playMetronome);
-  if (startMetronome) {
+
+  if (i < 1) playMetronome();
+
+  let x = new Audio(i_RI_userInput[i]);
+  if (i === 0) {
     setTimeout(() => {
-      document.getElementById("metronome").play();
+      x.play();
+      x.addEventListener("ended", collectAnswer);
+      i++;
     }, 750);
-  } else return;
+  } else {
+    x.play();
+    x.addEventListener("ended", collectAnswer);
+    i++;
+  }
+}
+
+function repeatQuestion() {
+  questionRI = rhytmInputDb[indexRIQuestion].q.map(x => {
+    if (x == 1) return "assets/audio/g4eight.mp3";
+    else if (x == 2) return "assets/audio/g4quarter.mp3";
+    else return "assets/audio/g4half.mp3";
+  });
+
+  if (questionPlayer == questionRI.length) {
+    questionPlayer = 0;
+    return;
+  }
+
+  if (questionPlayer < 1) playMetronome();
+
+  let x = new Audio(questionRI[questionPlayer]);
+  if (questionPlayer === 0) {
+    setTimeout(() => {
+      x.play();
+      x.addEventListener("ended", repeatQuestion);
+      questionPlayer++;
+    }, 750);
+  } else {
+    x.play();
+    x.addEventListener("ended", repeatQuestion);
+    questionPlayer++;
+  }
+}
+
+function playMetronome() {
+  const m = new Audio("assets/audio/metronome.wav");
+  m.addEventListener("ended", playMetronome);
+  if (metronomeBeats < 5) {
+    setTimeout(() => {
+      m.play();
+      metronomeBeats++;
+    }, 750);
+  } else {
+    metronomeBeats = 0;
+    return;
+  }
 }
 
 function nextQuestionRI() {
+  document.getElementById("hintRI").innerHTML = "";
   indexRIQuestion++;
+  i_RI_userInput = [];
   setTimeout(() => {
     repeatQuestion();
   }, 750);
 }
-function submitAnswerRI() {
-  let a = 0;
-  // questionRI.map(String);
 
+function submitAnswerRI() {
+  if (
+    _.isEqual(
+      questionRI.map(x => {
+        return x.toString();
+      }),
+      i_RI_userInput
+    )
+  ) {
+    document.getElementById("hintRI").innerHTML = "Correct!";
+    document.getElementById("hintRI").style.color = "green";
+  } else {
+    document.getElementById("hintRI").innerHTML = "Wrong!";
+    document.getElementById("hintRI").style.color = "red";
+  }
   console.log(questionRI);
   console.log(i_RI_userInput);
   console.log(
@@ -245,13 +268,9 @@ function submitAnswerRI() {
       i_RI_userInput
     )
   );
-  i_RI_userInput = [];
 }
 
 function popAnswer() {
   if (i_RI_userInput.length > 0) i_RI_userInput.pop();
   console.log(i_RI_userInput);
-}
-function stop() {
-  startMetronome = false;
 }

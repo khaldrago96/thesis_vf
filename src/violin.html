@@ -28,11 +28,11 @@
                 <div style="height: 400px;width: 100%; background: darkkhaki;position: relative;">
                     <div style="margin-left: 10px;">
                         <div id="button-container-appRI">
-                            <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="playEight()"
+                            <input type="image" id="btn-eight" src="assets/images/eigth-note.png" onclick="addInput(1)"
                                 value="1">
                             <input type="image" id="btn-quarter" src="assets/images/quarter-note.png"
-                                onclick="playQuarter()" value="2">
-                            <input type="image" id="btn-half" src="assets/images/half.png" onclick="playHalf()"
+                                onclick="addInput(2)" value="2">
+                            <input type="image" id="btn-half" src="assets/images/half.png" onclick="addInput(4)"
                                 value="4">
                             <input type="image" class="action-delete" id="action-btn" src="assets/images/delete.png"
                                 onclick="popAnswer()">
@@ -41,14 +41,10 @@
                                 onclick="collectAnswer()"></input>
                         </div>
                         <div id="action-repeat-next">
-                            <button class="btn btn-light" onclick="repeatQuestion()">Repeat</button>
+                            <button class="btn btn-light" onclick="repeatQuestion()">Play Sound</button>
                             <button class="btn btn-info" onclick="nextQuestionRI()">next</button>
                         </div>
-                        <button onclick="playMetronome()"> start metronome </button>
-                        <audio id="metronome">
-                            <source src="/src/assets/audio/metronome.wav" type="audio/mpeg">
-                        </audio>
-                        <button onclick="stop()">stop</button>
+                        <p id="hintRI"></p>
                     </div>
                 </div>
 
@@ -131,14 +127,11 @@
         </div>
     </div>
 
-    <audio id="1">
-        <source src="assets/audio/g4eight.mp3" type="audio/mpeg">
+    <audio id="1" src="assets/audio/g4eight.mp3">
     </audio>
-    <audio id="2">
-        <source src="assets/audio/g4quarter.mp3" type="audio/mpeg">
+    <audio id="2" src="assets/audio/g4quarter.mp3">
     </audio>
-    <audio id="4">
-        <source src="assets/audio/g4half.mp3" type="audio/mpeg">
+    <audio id="4" src="assets/audio/g4half.mp3">
     </audio>
 
 </body>
@@ -157,6 +150,7 @@
 <script src="js/metronome/visualization.js"></script>
 <script src="js/metronome/app.js"></script>
 <script src="./js/buzz.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.core.min.js"></script>
 <script src="../node_modules\vexflow\releases\vexflow-debug.js"></script>
 <script src="js/violin.js"></script>
 
