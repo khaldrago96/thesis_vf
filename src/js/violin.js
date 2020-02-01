@@ -55,22 +55,25 @@ let intervalAppDb = [
 
 var intervalAppIndex = 0;
 var trueAnswer = 0;
-
+var IIstart = false;
 function createQuestion() {
-  let indexToPlay = intervalAppDb[intervalAppIndex];
-  let x = new buzz.sound(audioFiles[indexToPlay.q[0]]);
-  let y = new buzz.sound(audioFiles[indexToPlay.q[1]]);
-  document.getElementById("hint").innerHTML =
-    "First key to be played: " + indexToPlay.startKey;
-  x.play();
-  setTimeout(() => {
-    y.play();
-  }, 600);
+  if (intervalAppIndex !== intervalAppDb.length) {
+    IIstart = true;
+    let indexToPlay = intervalAppDb[intervalAppIndex];
+    let x = new buzz.sound(audioFiles[indexToPlay.q[0]]);
+    let y = new buzz.sound(audioFiles[indexToPlay.q[1]]);
+    document.getElementById("hint").innerHTML =
+      "First key to be played: " + indexToPlay.startKey;
+    x.play();
+    setTimeout(() => {
+      y.play();
+    }, 600);
+  } else nextQ();
 }
 
 let indicator = document.getElementById("indicator");
 function checkIntervalAppAnswer(clickedBtn) {
-  if (intervalAppIndex > 0) {
+  if (IIstart) {
     let answer = intervalAppDb[intervalAppIndex].s;
     let correctInput = document.getElementById(clickedBtn.id);
     if (clickedBtn.id === answer) {
@@ -92,20 +95,23 @@ function checkIntervalAppAnswer(clickedBtn) {
 }
 
 function nextQ() {
-  if (intervalAppIndex > 0) {
+  if (IIstart && intervalAppIndex !== intervalAppDb.length) {
     let items = document.querySelectorAll(".a");
     indicator.innerHTML = "";
     for (let i = 0; i < items.length; i++) {
       items[i].classList.remove("btn-success", "btn-danger");
       items[i].classList.add("btn-info");
     }
-    intervalAppIndex.length === intervalAppDb.length
-      ? (intervalAppIndex = intervalAppDb.length - 1)
-      : intervalAppIndex++;
     setTimeout(() => {
       createQuestion();
     }, 500);
+  } else {
+    document.getElementById("appInterval").classList.add("hideApp");
+    document.getElementById("hint").innerHTML = "Exercise done!";
+    indicator.innerHTML = "Score: " + trueAnswer + "/" + intervalAppDb.length;
   }
+
+  intervalAppIndex++;
 }
 
 function showApp(appId) {
@@ -260,7 +266,10 @@ function playMetronome() {
 }
 
 function nextQuestionRI() {
-  if (questionPlayer > 0 && noteInput.length > 0) {
+  if (noteInput.length > 0) {
+    i_RI_userInput = [];
+    document.getElementById("boo").remove();
+    noteInput = [];
     document.getElementById("hintRI").innerHTML = "";
     indexRIQuestion++;
     i_RI_userInput = [];
@@ -269,9 +278,8 @@ function nextQuestionRI() {
     }, 750);
   }
 }
-
 function submitAnswerRI() {
-  if (questionPlayer > 0 && noteInput.length > 0) {
+  if (noteInput.length > 0 && questionRI) {
     if (
       _.isEqual(
         questionRI.map(x => {

@@ -76,23 +76,24 @@
                 <br>
                 <p id="hint"></p>
                 <p id="indicator"></p>
-                <div style="display: flex; flex-direction: row; justify-content: space-around;" id="appInterval">
-                    <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
-                        id="unison">Unison</button>
-                    <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
-                        Second</button>
-                    <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
-                        Second</button>
-                </div><br><br>
+                <div id="appInterval">
+                    <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                        <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
+                            id="unison">Unison</button>
+                        <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
+                            Second</button>
+                        <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
+                            Second</button>
+                    </div><br><br>
 
-                <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
-                <button class="btn btn-info" onclick="nextQ()">next</button>
-                <br>
-
+                    <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
+                    <button class="btn btn-info" onclick="nextQ()">next</button>
+                    <br>
+                </div>
                 <!-- PIANO -->
                 <div>
-                    <h5 style="text-align: center;">BUZZ JS</h5>
-                    <ul id="piano" style="margin-top:30px;" data-note="100">
+                    <h5 style="text-align: center;">Piano</h5>
+                    <ul id="piano" style="margin-top:10px;" data-note="100">
                         <li data-note="0" id="0" class="key">
                             <div data-note="8" class="black-key">C#</div>
                             C
