@@ -137,13 +137,10 @@ function showApp(appId) {
 //App Rhytm Input Exercises
 let rhytmInputDb = [
   { q: [4, 4] },
-  { q: [2, 1, 1, 1, 1, 2] },
-  { q: [1, 1, 2, 4] },
+  { q: [1, 1, 4, 2] },
   { q: [2, 4, 1, 1] },
   { q: [4, 2, 2] },
-  { q: [1, 1, 2, 2, 2] },
-  { q: [2, 2, 1, 1, 2] },
-  { q: [1, 1, 2, 1, 1, 1, 1] }
+  { q: [1, 1, 2, 4] }
 ];
 
 var questionPlayer = 0;
@@ -156,6 +153,7 @@ var i = 0;
 const VF = Vex.Flow;
 let noteInput = [];
 let letsCount = 0;
+let trueAnswerRI = 0;
 
 function addInput(e) {
   var vf;
@@ -224,31 +222,33 @@ function collectAnswer() {
 }
 
 function repeatQuestion() {
-  questionRI = rhytmInputDb[indexRIQuestion].q.map(x => {
-    if (x == 1) return "assets/audio/g4eight.mp3";
-    else if (x == 2) return "assets/audio/g4quarter.mp3";
-    else return "assets/audio/g4half.mp3";
-  });
+  if (indexRIQuestion !== rhytmInputDb.length) {
+    questionRI = rhytmInputDb[indexRIQuestion].q.map(x => {
+      if (x == 1) return "assets/audio/g4eight.mp3";
+      else if (x == 2) return "assets/audio/g4quarter.mp3";
+      else return "assets/audio/g4half.mp3";
+    });
 
-  if (questionPlayer == questionRI.length) {
-    questionPlayer = 0;
-    return;
-  }
+    if (questionPlayer == questionRI.length) {
+      questionPlayer = 0;
+      return;
+    }
 
-  if (questionPlayer < 1) playMetronome();
+    if (questionPlayer < 1) playMetronome();
 
-  let x = new Audio(questionRI[questionPlayer]);
-  if (questionPlayer === 0) {
-    setTimeout(() => {
+    let x = new Audio(questionRI[questionPlayer]);
+    if (questionPlayer === 0) {
+      setTimeout(() => {
+        x.play();
+        x.addEventListener("ended", repeatQuestion);
+        questionPlayer++;
+      }, 750);
+    } else {
       x.play();
       x.addEventListener("ended", repeatQuestion);
       questionPlayer++;
-    }, 750);
-  } else {
-    x.play();
-    x.addEventListener("ended", repeatQuestion);
-    questionPlayer++;
-  }
+    }
+  } else nextQuestionRI();
 }
 
 function playMetronome() {
@@ -266,16 +266,21 @@ function playMetronome() {
 }
 
 function nextQuestionRI() {
-  if (noteInput.length > 0) {
+  if (indexRIQuestion !== rhytmInputDb.length) {
     i_RI_userInput = [];
     document.getElementById("boo").remove();
     noteInput = [];
+    letsCount = 0;
     document.getElementById("hintRI").innerHTML = "";
     indexRIQuestion++;
     i_RI_userInput = [];
     setTimeout(() => {
       repeatQuestion();
     }, 750);
+  } else {
+    document.getElementById("appRhytmI").classList.add("hideApp");
+    document.getElementById("summaryRI").innerHTML =
+      "Exercise done! <br>Score: " + trueAnswerRI + "/" + rhytmInputDb.length;
   }
 }
 function submitAnswerRI() {
@@ -290,6 +295,7 @@ function submitAnswerRI() {
     ) {
       document.getElementById("hintRI").innerHTML = "Correct!";
       document.getElementById("hintRI").style.color = "green";
+      trueAnswerRI++;
     } else {
       document.getElementById("hintRI").innerHTML = "Wrong!";
       document.getElementById("hintRI").style.color = "red";
