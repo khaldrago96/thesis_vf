@@ -21,13 +21,11 @@ html {
 }
 
 .music-note {
- margin: auto !important;
+ /* margin: auto !important; */
  width: 50%;
 }
 
-#btn-eight,
-#btn-quarter,
-#btn-half {
+.note-input {
  height: 40px;
  width: 40px;
  border: 1px solid black;
@@ -36,9 +34,7 @@ html {
  background: whitesmoke;
 }
 
-#btn-eight:hover,
-#btn-quarter:hover,
-#btn-half:hover {
+.note-input:hover {
  background: lightgrey;
 }
 

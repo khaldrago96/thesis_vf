@@ -19,39 +19,14 @@ let pianoBuzz = document.getElementById("piano");
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
-
+document.getElementById("appRT").classList.add("hideApp");
+document.getElementById("appII").classList.add("hideApp");
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
     let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
     playSound.play();
   }
 });
-
-function startEasyScore() {
-  let randomNumber = Math.floor(Math.random() * questionArray.length + 1);
-  console.log("randomNumber :", randomNumber);
-  getRandomNumber(randomNumber);
-
-  var vf = new Vex.Flow.Factory({
-    renderer: {
-      elementId: "boo"
-    }
-  });
-  var score = vf.EasyScore();
-  var system = vf.System();
-  system
-    .addStave({
-      voices: [
-        score.voice(score.notes(questionArray[randomNumber - 1].a + "/" + 1))
-      ]
-    })
-    .addClef("treble");
-  vf.draw();
-  helper = randomNumber;
-
-  movebar();
-  totalQuestion++;
-}
 
 // App Interval Identification
 // unison = 0,major second = 1, minor second = 2,
@@ -129,18 +104,24 @@ function nextQ() {
   }, 500);
 }
 
-// function showApp(appId) {
-//   console.log(appId.id);
-//   let app1 = document.getElementById("appRI");
-//   let app2 = document.getElementById("appII");
-//   if (appId.id === "RI") {
-//     app1.classList.remove("hideApp");
-//     app2.classList.add("hideApp");
-//   } else {
-//     app2.classList.remove("hideApp");
-//     app1.classList.add("hideApp");
-//   }
-// }
+function showApp(appId) {
+  let app1 = document.getElementById("appRI");
+  let app2 = document.getElementById("appRT");
+  let app3 = document.getElementById("appII");
+  if (appId.id === "RI") {
+    app1.classList.remove("hideApp");
+    app2.classList.add("hideApp");
+    app3.classList.add("hideApp");
+  } else if (appId.id === "RT") {
+    app2.classList.remove("hideApp");
+    app1.classList.add("hideApp");
+    app3.classList.add("hideApp");
+  } else {
+    app3.classList.remove("hideApp");
+    app1.classList.add("hideApp");
+    app2.classList.add("hideApp");
+  }
+}
 
 // App Rhytm Input
 //App Rhytm Input Exercises
@@ -162,12 +143,52 @@ let i_RI_userInput = [];
 var startMetronome = true;
 var metronomeBeats = 0;
 var i = 0;
+const VF = Vex.Flow;
+let noteInput = [];
+let letsCount = 0;
 
-function addInput(x) {
-  if (x === 1) i_RI_userInput.push("assets/audio/g4eight.mp3");
-  else if (x === 2) i_RI_userInput.push("assets/audio/g4quarter.mp3");
-  else i_RI_userInput.push("assets/audio/g4half.mp3");
-  console.log(i_RI_userInput);
+function addInput(e) {
+  var vf;
+  if (document.getElementById("boo") !== null) {
+    document.getElementById("boo").remove();
+  }
+  eleBoo = document.createElement("div");
+  eleBoo.setAttribute("id", "boo");
+  document.getElementById("parent").appendChild(eleBoo);
+  vf = new VF.Factory({ renderer: { elementId: "boo" } });
+  var score = vf.EasyScore();
+  var system = vf.System();
+  switch (e.id) {
+    case "1":
+      noteInput.push("G4/8");
+      i_RI_userInput.push("assets/audio/g4eight.mp3");
+      break;
+    case "2":
+      noteInput.push("G4/q");
+      i_RI_userInput.push("assets/audio/g4quarter.mp3");
+      break;
+    case "4":
+      noteInput.push("G4/h");
+      i_RI_userInput.push("assets/audio/g4half.mp3");
+      break;
+  }
+  let setTime = parseInt(e.id) + letsCount + "/8";
+  score.set({ time: setTime });
+  system.addStave({
+    voices: [score.voice(score.notes(noteInput.toString()))]
+  });
+  switch (e.id) {
+    case "1":
+      letsCount++;
+      break;
+    case "2":
+      letsCount += 2;
+      break;
+    case "4":
+      letsCount += 4;
+      break;
+  }
+  vf.draw();
 }
 
 function collectAnswer() {
@@ -235,42 +256,40 @@ function playMetronome() {
 }
 
 function nextQuestionRI() {
-  document.getElementById("hintRI").innerHTML = "";
-  indexRIQuestion++;
-  i_RI_userInput = [];
-  setTimeout(() => {
-    repeatQuestion();
-  }, 750);
+  if (questionPlayer > 0 && noteInput.length > 0) {
+    document.getElementById("hintRI").innerHTML = "";
+    indexRIQuestion++;
+    i_RI_userInput = [];
+    setTimeout(() => {
+      repeatQuestion();
+    }, 750);
+  }
 }
 
 function submitAnswerRI() {
-  if (
-    _.isEqual(
-      questionRI.map(x => {
-        return x.toString();
-      }),
-      i_RI_userInput
-    )
-  ) {
-    document.getElementById("hintRI").innerHTML = "Correct!";
-    document.getElementById("hintRI").style.color = "green";
-  } else {
-    document.getElementById("hintRI").innerHTML = "Wrong!";
-    document.getElementById("hintRI").style.color = "red";
+  if (questionPlayer > 0 && noteInput.length > 0) {
+    if (
+      _.isEqual(
+        questionRI.map(x => {
+          return x.toString();
+        }),
+        i_RI_userInput
+      )
+    ) {
+      document.getElementById("hintRI").innerHTML = "Correct!";
+      document.getElementById("hintRI").style.color = "green";
+    } else {
+      document.getElementById("hintRI").innerHTML = "Wrong!";
+      document.getElementById("hintRI").style.color = "red";
+    }
   }
-  console.log(questionRI);
-  console.log(i_RI_userInput);
-  console.log(
-    _.isEqual(
-      questionRI.map(x => {
-        return x.toString();
-      }),
-      i_RI_userInput
-    )
-  );
 }
 
 function popAnswer() {
-  if (i_RI_userInput.length > 0) i_RI_userInput.pop();
-  console.log(i_RI_userInput);
+  if (i_RI_userInput.length > 0) {
+    i_RI_userInput = [];
+    document.getElementById("boo").remove();
+    noteInput = [];
+    letsCount = 0;
+  }
 }
