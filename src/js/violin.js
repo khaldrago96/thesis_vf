@@ -70,38 +70,42 @@ function createQuestion() {
 
 let indicator = document.getElementById("indicator");
 function checkIntervalAppAnswer(clickedBtn) {
-  let answer = intervalAppDb[intervalAppIndex].s;
-  let correctInput = document.getElementById(clickedBtn.id);
-  if (clickedBtn.id === answer) {
-    trueAnswer++;
-    indicator.style.color = "green";
-    indicator.innerHTML = "Correct!";
-    correctInput.classList.add("btn-success");
-    correctInput.classList.remove("btn-info");
-    new buzz.sound("./assets/audio/right-answer.mp3").play();
-  } else {
-    indicator.style.color = "red";
-    indicator.innerHTML = "Wrong!";
-    correctInput.classList.add("btn-danger");
-    document.getElementById(answer).classList.remove("btn-info");
-    document.getElementById(answer).classList.add("btn-success");
-    new buzz.sound("./assets/audio/wrong-answer.mp3").play();
+  if (intervalAppIndex > 0) {
+    let answer = intervalAppDb[intervalAppIndex].s;
+    let correctInput = document.getElementById(clickedBtn.id);
+    if (clickedBtn.id === answer) {
+      trueAnswer++;
+      indicator.style.color = "green";
+      indicator.innerHTML = "Correct!";
+      correctInput.classList.add("btn-success");
+      correctInput.classList.remove("btn-info");
+      // new buzz.sound("./assets/audio/right-answer.mp3").play();
+    } else {
+      indicator.style.color = "red";
+      indicator.innerHTML = "Wrong!";
+      correctInput.classList.add("btn-danger");
+      document.getElementById(answer).classList.remove("btn-info");
+      document.getElementById(answer).classList.add("btn-success");
+      // new buzz.sound("./assets/audio/wrong-answer.mp3").play();
+    }
   }
 }
 
 function nextQ() {
-  let items = document.querySelectorAll(".a");
-  indicator.innerHTML = "";
-  for (let i = 0; i < items.length; i++) {
-    items[i].classList.remove("btn-success", "btn-danger");
-    items[i].classList.add("btn-info");
+  if (intervalAppIndex > 0) {
+    let items = document.querySelectorAll(".a");
+    indicator.innerHTML = "";
+    for (let i = 0; i < items.length; i++) {
+      items[i].classList.remove("btn-success", "btn-danger");
+      items[i].classList.add("btn-info");
+    }
+    intervalAppIndex.length === intervalAppDb.length
+      ? (intervalAppIndex = intervalAppDb.length - 1)
+      : intervalAppIndex++;
+    setTimeout(() => {
+      createQuestion();
+    }, 500);
   }
-  intervalAppIndex.length === intervalAppDb.length
-    ? (intervalAppIndex = intervalAppDb.length - 1)
-    : intervalAppIndex++;
-  setTimeout(() => {
-    createQuestion();
-  }, 500);
 }
 
 function showApp(appId) {
