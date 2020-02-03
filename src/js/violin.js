@@ -19,7 +19,7 @@ let pianoBuzz = document.getElementById("piano");
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
-document.getElementById("appRT").classList.add("hideApp");
+document.getElementById("appRI").classList.add("hideApp");
 document.getElementById("appII").classList.add("hideApp");
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
@@ -126,6 +126,7 @@ function showApp(appId) {
     app2.classList.remove("hideApp");
     app1.classList.add("hideApp");
     app3.classList.add("hideApp");
+    createQuestionRT();
   } else {
     app3.classList.remove("hideApp");
     app1.classList.add("hideApp");
@@ -310,4 +311,58 @@ function popAnswer() {
     noteInput = [];
     letsCount = 0;
   }
+}
+
+/* App Rhytm Tapping */
+let rhythmTappingDb = [
+  "G4/q,G4/q,G4/h",
+  "G4/h,G4/h",
+  "G4/8,G4/h,G4/q,G4/8",
+  "G4/q,G4/q,G4/8,G4/q,G4/8",
+  "G4/q,G4/8,G4/8,G4/h"
+];
+let indexRTQuestion = 0;
+
+function createQuestionRT() {
+  console.log(rhythmTappingDb[indexRTQuestion]);
+  if (document.getElementById("noteRT") !== null) {
+    console.log("object");
+    document.getElementById("noteRT").remove();
+  }
+
+  eleBoo = document.createElement("div");
+  eleBoo.setAttribute("id", "noteRT");
+  document.getElementById("parentRT").appendChild(eleBoo);
+  vf = new VF.Factory({ renderer: { elementId: "noteRT" } });
+  var score = vf.EasyScore();
+  var system = vf.System();
+
+  score.set({ time: "4/4" });
+  system
+    .addStave({
+      voices: [score.voice(score.notes(rhythmTappingDb[indexRTQuestion]))]
+    })
+    .addTimeSignature("4/4");
+  vf.draw();
+}
+
+function nextQuestionRT() {
+  indexRTQuestion++;
+  document.getElementById("noteRT").remove();
+  createQuestionRT();
+}
+
+function startRT() {
+  let x = 0;
+  let test = setInterval(() => {
+    if (x < 4) {
+      document.getElementById("RT" + x.toString()).style.backgroundColor =
+        "red";
+      x++;
+    } else {
+      x = 0;
+      let ele = document.getElementsByClassName("a");
+      for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
+    }
+  }, 750);
 }

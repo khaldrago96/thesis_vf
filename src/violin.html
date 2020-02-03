@@ -50,90 +50,100 @@
                         <div class="music-note" id="boo"></div>
                     </div>
                 </div>
-
-                <!-- ---------------------------------------------------------------------------- -->
-                <!-- METRONOME -->
                 <br><br>
-
-            </div>
-            <div id="appRT">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="form-group">
-                            <label for="tempo">Tempo</label>
-                            <input id="tempo" class='form-control' type="number" value='80' min='20' max='180'
-                                onChange="metronomeApp.setTempo(this.value);">
-                        </div>
-                        <input id="metronome" class="form-control btn btn-secondary" type="button" value="Start"
-                            onclick="metronomeApp.toggle()" />
-                    </div>
-                    <div id='visualization' class="col-sm">
-                    </div>
-                </div>
             </div>
             <!-- ---------------------------------------------------------------------------- -->
-            <!-- exercises and button  -->
-            <div id="appII">
-                <br>
-                <p id="hint"></p>
-                <p id="indicator"></p>
-                <div id="appInterval">
-                    <div style="display: flex; flex-direction: row; justify-content: space-around;">
-                        <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
-                            id="unison">Unison</button>
-                        <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
-                            Second</button>
-                        <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
-                            Second</button>
-                    </div><br><br>
+            <!-- App Rhytm Tapping & Metronome -->
+            <div id="appRT" class="container">
+                <p id="summaryRI"></p>
+                <div id="appRT">
+                    <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT">
+                        <div style="margin-left: 10px;">
+                            <div id="button-container-appRI">
+                                <button class="btn btn-block btn-danger" onclick="startRT()">Tap</button>
+                            </div>
+                            <div id="action-repeat-next">
+                                <button class="btn btn-info" onclick="nextQuestionRT()">Next</button>
+                            </div>
+                            <p id="hintRI"></p>
+                        </div>
 
-                    <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
-                    <button class="btn btn-info" onclick="nextQ()">next</button>
-                    <br>
-                </div>
-                <!-- PIANO -->
-                <div>
-                    <h5 style="text-align: center;">Piano</h5>
-                    <ul id="piano" style="margin-top:10px;" data-note="100">
-                        <li data-note="0" id="0" class="key">
-                            <div data-note="8" class="black-key">C#</div>
-                            C
-                        </li>
-                        <li data-note="1" class="key">
-                            <div data-note="9" class="black-key">D#</div>
-                            D
-                        </li>
-                        <li data-note="2" class="key">
-                            E
-                        </li>
-                        <li data-note="3" class="key">
-                            <div data-note="10" class="black-key">F#</div>
-                            F
-                        </li>
-                        <li data-note="4" class="key">
-                            <div data-note="11" class="black-key">G#</div>
-                            G
-                        </li>
-                        <li data-note="5" class="key">
-                            <div data-note="12" class="black-key">A#</div>
-                            A
-                        </li>
-                        <li data-note="6" class="key">
-                            B
-                        </li>
-                        <li data-note="7" class="key">
-                            <div data-note="100" class="black-key"></div>
-                            C5
-                        </li>
-                        <li data-note="100" class="key"></li>
-                    </ul>
+                        <div style="display: flex;flex-direction: row;">
+                            <div class="stepbar-RT a" id="RT0"> </div>
+                            <div class="stepbar-RT a" id="RT1"> </div>
+                            <div class="stepbar-RT a" id="RT2"> </div>
+                            <div class="stepbar-RT a" id="RT3"> </div>
+                        </div>
+                        <div id="parentRT">
+                            <div id="noteRT"></div>
+                        </div>
+                    </div>
+                    <br><br>
                 </div>
             </div>
         </div>
+        <!-- ---------------------------------------------------------------------------- -->
+        <!-- exercises and button  -->
+        <div id="appII">
+            <br>
+            <p id="hint"></p>
+            <p id="indicator"></p>
+            <div id="appInterval">
+                <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                    <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
+                        id="unison">Unison</button>
+                    <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
+                        Second</button>
+                    <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
+                        Second</button>
+                </div><br><br>
+
+                <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
+                <button class="btn btn-info" onclick="nextQ()">next</button>
+                <br>
+            </div>
+            <!-- PIANO -->
+            <div>
+                <h5 style="text-align: center;">Piano</h5>
+                <ul id="piano" style="margin-top:10px;" data-note="100">
+                    <li data-note="0" id="0" class="key">
+                        <div data-note="8" class="black-key">C#</div>
+                        C
+                    </li>
+                    <li data-note="1" class="key">
+                        <div data-note="9" class="black-key">D#</div>
+                        D
+                    </li>
+                    <li data-note="2" class="key">
+                        E
+                    </li>
+                    <li data-note="3" class="key">
+                        <div data-note="10" class="black-key">F#</div>
+                        F
+                    </li>
+                    <li data-note="4" class="key">
+                        <div data-note="11" class="black-key">G#</div>
+                        G
+                    </li>
+                    <li data-note="5" class="key">
+                        <div data-note="12" class="black-key">A#</div>
+                        A
+                    </li>
+                    <li data-note="6" class="key">
+                        B
+                    </li>
+                    <li data-note="7" class="key">
+                        <div data-note="100" class="black-key"></div>
+                        C5
+                    </li>
+                    <li data-note="100" class="key"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     </div>
 
 </body>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
