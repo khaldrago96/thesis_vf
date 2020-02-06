@@ -17,7 +17,7 @@ let pianoBuzz = document.getElementById("piano");
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
-document.getElementById("appRT").classList.add("hideApp");
+document.getElementById("appII").classList.add("hideApp");
 document.getElementById("appRI").classList.add("hideApp");
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
@@ -351,14 +351,13 @@ function createQuestionRT() {
 }
 
 function playMetronomeRT() {
-  const m = new Audio("assets/audio/metronome.wav");
-  m.addEventListener("ended", playMetronomeRT);
-
-  if (metronomeRT)
-    setTimeout(() => {
-      m.play();
-    }, 750);
-  else return;
+  // const m = new Audio("assets/audio/metronome.wav");
+  // m.addEventListener("ended", playMetronomeRT);
+  // if (metronomeRT)
+  //   setTimeout(() => {
+  //     m.play();
+  //   }, 750);
+  // else return;
 }
 function nextQuestionRT() {
   indexRTQuestion++;
@@ -375,8 +374,10 @@ function stopmet() {
   let ele = document.getElementsByClassName("a");
   for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
 }
+document.getElementById("shadow-bar").classList.add("hideApp");
 
 function startRT() {
+  document.getElementById("shadow-bar").classList.remove("hideApp");
   progressBar = 0;
   startBar = setInterval(() => {
     if (progressBar < 4) {

@@ -199,6 +199,8 @@ li {
  height: 10px;
  bottom: 0;
  border-radius: 5px;
+ margin-left: 5px;
+ zoom: 1;
 }
 
 #appRhytmI {
@@ -230,6 +232,16 @@ li {
   flex-direction: row;
   justify-content: space-evenly;
  }
+
+ #boo,
+ #noteRT {
+  zoom: 70%;
+ }
+
+ #shadow-bar {
+  zoom: 0.7;
+  bottom: 70px;
+ }
 }
 
 /* Tablets */
@@ -258,6 +270,12 @@ li {
  #boo,
  #noteRT {
   zoom: 1.7;
+ }
+
+ #shadow-bar {
+  bottom: -40px;
+  margin-left: 10px;
+  zoom: 1.67;
  }
 }
 
