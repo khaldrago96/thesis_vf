@@ -1,23 +1,69 @@
-body,
-html {
- background-color: #335c84 !important;
- padding: 0;
- display: flex;
- justify-content: center;
- align-items: center;
+body {
+ background-color: #e3f2fd !important;
  width: 100%;
+ margin-left: 0px;
 }
 
-.button-navigation {
- margin-top: 30px;
- display: flex;
- flex-direction: row;
- justify-content: space-around;
-}
 .container {
  height: 100% !important;
  background-color: #e3f2fd !important;
- padding: 0;
+ min-width: 360px;
+ height: 100%;
+}
+/* Buttons for the whole app */
+.btn {
+ display: inline-block;
+ border: 1px solid transparent;
+ font-size: 1rem;
+ border-radius: 0.25rem;
+ height: 40px;
+ margin-left: 3px;
+ margin-top: 5px;
+}
+
+.btn-dark {
+ color: #fff;
+ background-color: #343a40;
+ border: 0.5px solid black;
+}
+
+.btn-success {
+ color: #fff;
+ background-color: #28a745;
+ border: 0.5px solid black;
+}
+
+.btn-light {
+ color: #212529;
+ background-color: #f8f9fa;
+ border: 0.5px solid black;
+}
+
+.btn-info {
+ color: #fff;
+ background-color: #17a2b8;
+ border: 0.5px solid black;
+}
+
+.btn-danger {
+ color: #fff;
+ background-color: #dc3545;
+ border: 0.5px solid black;
+ width: 300px;
+}
+
+.btn-warning {
+ color: #212529;
+ background-color: #ffc107;
+ border: 0.5px solid black;
+}
+/*---------------------------*/
+
+.button-navigation {
+ margin-top: 5px;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
 }
 
 .music-note {
@@ -26,12 +72,13 @@ html {
 }
 
 .note-input {
- height: 40px;
- width: 40px;
+ height: 30px;
+ width: 43px;
  border: 1px solid black;
  border-radius: 20px;
  padding: 6px;
  background: whitesmoke;
+ zoom: 0.75;
 }
 
 .note-input:hover {
@@ -39,22 +86,14 @@ html {
 }
 
 /* App - Interval Identification */
+.piano-scroller {
+ display: flex;
+ overflow-x: auto;
+}
+
 ul {
  height: 18.875em;
  width: 34em;
- margin: 5em auto;
- padding: 3em 0 0 3em;
- position: relative;
- border: 1px solid #160801;
- border-radius: 1em;
- background: linear-gradient(
-   to bottom right,
-   rgba(0, 0, 0, 0.3),
-   rgba(0, 0, 0, 0)
-  ),
-  url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/187/vwood.png);
- box-shadow: 0 0 50px rgba(0, 0, 0, 0.5) inset,
-  0 1px rgba(212, 152, 125, 0.2) inset, 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 ul li:first-child {
@@ -67,7 +106,7 @@ ul li:last-child {
 
 ul {
  list-style: none;
- width: 630px;
+ width: 530px;
  display: flex;
 }
 
@@ -129,10 +168,6 @@ li {
  background: inherit;
 }
 
-.action-delete:hover {
- background-color: red !important;
-}
-
 #action-repeat-next {
  position: absolute;
  top: 0;
@@ -144,7 +179,6 @@ li {
  display: flex;
  flex-direction: row;
  justify-content: space-around;
- width: 50%;
  align-items: center;
  margin-top: 20px;
 }
@@ -156,4 +190,115 @@ li {
  height: 20px;
  border: 1px solid black;
  border-radius: 6px;
+}
+
+#shadow-bar {
+ position: absolute;
+ background-color: lightslategray;
+ width: 500px;
+ height: 10px;
+ bottom: 0;
+ border-radius: 5px;
+}
+
+#appRhytmI {
+ display: flex;
+ flex-direction: column;
+}
+
+#boo,
+#noteRT {
+ zoom: 70%;
+}
+
+/*Media Queries*/
+/* Phones */
+@media only screen and (min-width: 350px) and (max-width: 480px) {
+ .btn {
+  width: 120px !important;
+ }
+
+ #inputButtonsII {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+
+ #buttonsII,
+ #buttonsRT {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+ }
+}
+
+/* Tablets */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+ .btn {
+  width: 400px !important;
+ }
+
+ #inputButtonsII {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+ #buttonsII,
+ #buttonsRT {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+ }
+
+ #piano {
+  zoom: 1.3;
+  margin: 0 auto;
+ }
+
+ #boo,
+ #noteRT {
+  zoom: 1.7;
+ }
+}
+
+/* Laptops */
+@media only screen and (min-device-width: 1025px) {
+ .btn {
+  width: 600px !important;
+ }
+
+ #inputButtonsII {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+ #buttonsII,
+ #buttonsRT {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+ }
+
+ #button-container-appRI {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 15px;
+ }
+ .note-input,
+ .action-btn {
+  margin: 0 20px;
+ }
+
+ #piano {
+  zoom: 1.3;
+  margin: 0 auto;
+ }
+
+ #boo,
+ #noteRT {
+  zoom: 1;
+ }
 }

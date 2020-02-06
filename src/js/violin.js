@@ -1,5 +1,3 @@
-/* Testing BuzzJS */
-// var mySound = new buzz.sound("assets/audio/audio/piano/040-c.wav");
 let audioFiles = [
   "assets/audio/piano/040-c.wav",
   "assets/audio/piano/042-d.wav",
@@ -19,8 +17,8 @@ let pianoBuzz = document.getElementById("piano");
 let helper;
 let rightAnswer = 0;
 let totalQuestion = 0;
+document.getElementById("appRT").classList.add("hideApp");
 document.getElementById("appRI").classList.add("hideApp");
-document.getElementById("appII").classList.add("hideApp");
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
     let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
@@ -164,7 +162,8 @@ function addInput(e) {
   eleBoo = document.createElement("div");
   eleBoo.setAttribute("id", "boo");
   document.getElementById("parent").appendChild(eleBoo);
-  vf = new VF.Factory({ renderer: { elementId: "boo" } });
+  vf = new VF.Factory({ renderer: { elementId: "boo", width: 500 } });
+
   var score = vf.EasyScore();
   var system = vf.System();
   switch (e.id) {
@@ -322,18 +321,23 @@ let rhythmTappingDb = [
   "G4/q,G4/8,G4/8,G4/h"
 ];
 let indexRTQuestion = 0;
-
+let metronomeRT = false;
+let startBar;
+let progressBar = 0;
 function createQuestionRT() {
-  console.log(rhythmTappingDb[indexRTQuestion]);
+  startRT();
+  metronomeRT = true;
+  playMetronomeRT();
   if (document.getElementById("noteRT") !== null) {
-    console.log("object");
     document.getElementById("noteRT").remove();
   }
 
   eleBoo = document.createElement("div");
   eleBoo.setAttribute("id", "noteRT");
   document.getElementById("parentRT").appendChild(eleBoo);
-  vf = new VF.Factory({ renderer: { elementId: "noteRT" } });
+  vf = new VF.Factory({
+    renderer: { elementId: "noteRT", height: 100, width: 500 }
+  });
   var score = vf.EasyScore();
   var system = vf.System();
 
@@ -346,21 +350,42 @@ function createQuestionRT() {
   vf.draw();
 }
 
+function playMetronomeRT() {
+  const m = new Audio("assets/audio/metronome.wav");
+  m.addEventListener("ended", playMetronomeRT);
+
+  if (metronomeRT)
+    setTimeout(() => {
+      m.play();
+    }, 750);
+  else return;
+}
 function nextQuestionRT() {
   indexRTQuestion++;
+  stopmet();
   document.getElementById("noteRT").remove();
-  createQuestionRT();
+  setTimeout(() => {
+    createQuestionRT();
+  }, 1000);
+}
+
+function stopmet() {
+  metronomeRT = false;
+  clearInterval(startBar);
+  let ele = document.getElementsByClassName("a");
+  for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
 }
 
 function startRT() {
-  let x = 0;
-  let test = setInterval(() => {
-    if (x < 4) {
-      document.getElementById("RT" + x.toString()).style.backgroundColor =
-        "red";
-      x++;
+  progressBar = 0;
+  startBar = setInterval(() => {
+    if (progressBar < 4) {
+      document.getElementById(
+        "RT" + progressBar.toString()
+      ).style.backgroundColor = "red";
+      progressBar++;
     } else {
-      x = 0;
+      progressBar = 0;
       let ele = document.getElementsByClassName("a");
       for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
     }

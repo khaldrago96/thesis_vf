@@ -6,157 +6,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css">
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../node_modules\bootstrap\dist\css\bootstrap.min.css" type="text/css"> -->
     </link>
     <link rel="stylesheet" href="./app.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="container" style="margin-top: 40px;">
+    <div class="container">
         <div class="button-navigation">
             <button class="btn btn-dark" onclick="showApp(this)" id="RI">Rhytm Input</button>
             <button class="btn btn-dark" onclick="showApp(this)" id="RT">Rhytm Tapping</button>
             <button class="btn btn-dark" onclick="showApp(this)" id="II">Interval Identification</button>
         </div>
+        <br>
         <!-- <h2 style="text-align: center; margin-top: 10px; color:crimson;">App : App Name </h2> -->
-        <div style="margin-top: 40px;margin-left: 30px;">
-            <p id="summaryRI"></p>
-            <div id="appRI">
-                <div style="height: 400px;width: 100%;position: relative;" id="appRhytmI">
-                    <div style="margin-left: 10px;">
-                        <div id="button-container-appRI">
-                            <input type="image" id="1" src="assets/images/eigth-note.png" onclick="addInput(this)"
-                                value="1" class="note-input">
-                            <input type="image" id="2" src="assets/images/quarter-note.png" onclick="addInput(this)"
-                                value="2" class="note-input">
-                            <input type="image" id="4" src="assets/images/half.png" onclick="addInput(this)" value="4"
-                                class="note-input">
-                            <input type="image" class="action-delete" id="action-btn" src="assets/images/delete.png"
-                                onclick="popAnswer()">
-                            <button class="btn btn-success" onclick="submitAnswerRI()">Submit</button>
-                            <input type="image" src="assets/images/play.png" class="action-btn" id="action-btn"
-                                onclick="collectAnswer()"></input>
-                        </div>
-                        <div id="action-repeat-next">
-                            <button class="btn btn-light" onclick="repeatQuestion()">Play Sound</button>
-                            <button class="btn btn-info" onclick="nextQuestionRI()">next</button>
-                        </div>
-                        <p id="hintRI"></p>
-                    </div>
-                    <div id="parent">
-                        <div class="music-note" id="boo"></div>
-                    </div>
-                </div>
-                <br><br>
-            </div>
-            <!-- ---------------------------------------------------------------------------- -->
-            <!-- App Rhytm Tapping & Metronome -->
-            <div id="appRT" class="container">
-                <p id="summaryRI"></p>
-                <div id="appRT">
-                    <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT">
-                        <div style="margin-left: 10px;">
-                            <div id="button-container-appRI">
-                                <button class="btn btn-block btn-danger" onclick="startRT()">Tap</button>
-                            </div>
-                            <div id="action-repeat-next">
-                                <button class="btn btn-info" onclick="nextQuestionRT()">Next</button>
-                            </div>
-                            <p id="hintRI"></p>
-                        </div>
 
-                        <div style="display: flex;flex-direction: row;">
-                            <div class="stepbar-RT a" id="RT0"> </div>
-                            <div class="stepbar-RT a" id="RT1"> </div>
-                            <div class="stepbar-RT a" id="RT2"> </div>
-                            <div class="stepbar-RT a" id="RT3"> </div>
-                        </div>
-                        <div id="parentRT">
-                            <div id="noteRT"></div>
-                        </div>
-                    </div>
-                    <br><br>
+        <div id="appRI">
+            <p id="summaryRI"></p>
+            <div style="height: 85vh;width: 100%;position: relative;" id="appRhytmI">
+                <div id="button-container-appRI">
+                    <input type="image" id="1" src="assets/images/eigth-note.png" onclick="addInput(this)" value="1"
+                        class="note-input">
+                    <input type="image" id="2" src="assets/images/quarter-note.png" onclick="addInput(this)" value="2"
+                        class="note-input">
+                    <input type="image" id="4" src="assets/images/half.png" onclick="addInput(this)" value="4"
+                        class="note-input">
+                    <input type="image" class="action-delete" id="action-btn" src="assets/images/delete.png"
+                        onclick="popAnswer()">
+                    <input type="image" src="assets/images/play.png" id="action-btn" id="action-btn"
+                        onclick="collectAnswer()">
                 </div>
+                <div id="button-container-appRI">
+                    <button class="btn btn-warning" onclick="repeatQuestion()">Play Sound</button> <button
+                        class="btn btn-success" onclick="submitAnswerRI()">Submit</button>
+                    <button class="btn btn-light" onclick="nextQuestionRI()" style="width: 70px;">next</button>
+                </div>
+                <p id="hintRI"></p>
+                <div id="parent">
+                    <div class="music-note" id="boo"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ---------------------------------------------------------------------------- -->
+        <!-- App Rhytm Tapping & Metronome -->
+        <div id="appRT" style="height: 85vh;width: 100%;position: relative;">
+            <p id="summaryRI"></p>
+            <!-- <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT"> -->
+            <div>
+                <div id="buttonsRT">
+                    <button class="btn btn-block btn-danger" onclick="startRT()" style="flex-grow: 2;">Tap</button>
+                    <button class="btn btn-light" onclick="nextQuestionRT()">Next</button>
+                </div>
+                <p id="hintRI"></p>
+            </div>
+
+            <div style="display: flex;flex-direction: row;">
+                <div class="stepbar-RT a" id="RT0"> </div>
+                <div class="stepbar-RT a" id="RT1"> </div>
+                <div class="stepbar-RT a" id="RT2"> </div>
+                <div class="stepbar-RT a" id="RT3"> </div>
+            </div>
+            <div id="parentRT" style="position:relative;height: 130px;">
+                <div id="noteRT"></div>
+                <!-- <div id="shadow-bar"></div> -->
             </div>
         </div>
         <!-- ---------------------------------------------------------------------------- -->
         <!-- exercises and button  -->
         <div id="appII">
-            <br>
             <p id="hint"></p>
             <p id="indicator"></p>
-            <div id="appInterval">
-                <div style="display: flex; flex-direction: row; justify-content: space-around;">
+            <div id="appInterval" style="height: 95hv;position: relative;">
+                <div id="inputButtonsII">
                     <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)"
                         id="unison">Unison</button>
                     <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
                         Second</button>
                     <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
                         Second</button>
-                </div><br><br>
-
-                <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
-                <button class="btn btn-info" onclick="nextQ()">next</button>
+                </div>
+                <br>
+                <div id="buttonsII">
+                    <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
+                    <button class="btn btn-light" onclick="nextQ()">next</button>
+                </div>
                 <br>
             </div>
             <!-- PIANO -->
             <div>
-                <h5 style="text-align: center;">Piano</h5>
-                <ul id="piano" style="margin-top:10px;" data-note="100">
-                    <li data-note="0" id="0" class="key">
-                        <div data-note="8" class="black-key">C#</div>
-                        C
-                    </li>
-                    <li data-note="1" class="key">
-                        <div data-note="9" class="black-key">D#</div>
-                        D
-                    </li>
-                    <li data-note="2" class="key">
-                        E
-                    </li>
-                    <li data-note="3" class="key">
-                        <div data-note="10" class="black-key">F#</div>
-                        F
-                    </li>
-                    <li data-note="4" class="key">
-                        <div data-note="11" class="black-key">G#</div>
-                        G
-                    </li>
-                    <li data-note="5" class="key">
-                        <div data-note="12" class="black-key">A#</div>
-                        A
-                    </li>
-                    <li data-note="6" class="key">
-                        B
-                    </li>
-                    <li data-note="7" class="key">
-                        <div data-note="100" class="black-key"></div>
-                        C5
-                    </li>
-                    <li data-note="100" class="key"></li>
-                </ul>
+                <h1 style="text-align: center;">Piano</h1>
+                <div class="piano-scroller" style="margin-left:-20px">
+                    <ul id="piano" data-note="100">
+                        <li data-note="0" id="0" class="key">
+                            <div data-note="8" class="black-key">C#</div>
+                            C
+                        </li>
+                        <li data-note="1" class="key">
+                            <div data-note="9" class="black-key">D#</div>
+                            D
+                        </li>
+                        <li data-note="2" class="key">
+                            E
+                        </li>
+                        <li data-note="3" class="key">
+                            <div data-note="10" class="black-key">F#</div>
+                            F
+                        </li>
+                        <li data-note="4" class="key">
+                            <div data-note="11" class="black-key">G#</div>
+                            G
+                        </li>
+                        <li data-note="5" class="key">
+                            <div data-note="12" class="black-key">A#</div>
+                            A
+                        </li>
+                        <li data-note="6" class="key">
+                            B
+                        </li>
+                        <li data-note="7" class="key">
+                            <div data-note="100" class="black-key"></div>
+                            C5
+                        </li>
+                        <li data-note="100" class="key"></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.core.js"></script>
-<script src="js/metronome/metronome-sound.js"></script>
+<!-- <script src="js/metronome/metronome-sound.js"></script>
 <script src="js/metronome/visualization.js"></script>
-<script src="js/metronome/app.js"></script>
+<script src="js/metronome/app.js"></script> -->
 <script src="./js/buzz.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.core.min.js"></script>
 <script src="../node_modules\vexflow\releases\vexflow-debug.js"></script>
