@@ -314,15 +314,15 @@ function popAnswer() {
 
 /* App Rhytm Tapping */
 let rhythmTappingDb = [
-  "G4/q,G4/q,G4/h",
   "G4/h,G4/h",
   "G4/8,G4/h,G4/q,G4/8",
+  "G4/q,G4/q,G4/h",
   "G4/q,G4/q,G4/8,G4/q,G4/8",
   "G4/q,G4/8,G4/8,G4/h"
 ];
 let indexRTQuestion = 0;
 let metronomeRT = false;
-let startBar;
+let startBar, inputBar;
 let progressBar = 0;
 function createQuestionRT() {
   startRT();
@@ -360,22 +360,30 @@ function playMetronomeRT() {
   // else return;
 }
 function nextQuestionRT() {
-  indexRTQuestion++;
+  console.log("next");
   stopmet();
+  let removeSolutionRT = document.getElementById("sb-solution");
+  let removeAnswerRT = document.getElementById("sb-parent");
+  while (removeSolutionRT.firstChild) removeSolutionRT.firstChild.remove();
+  console.log(removeSolutionRT.firstChild !== null);
+  while (removeAnswerRT.firstChild) removeAnswerRT.firstChild.remove();
   document.getElementById("noteRT").remove();
   setTimeout(() => {
     createQuestionRT();
   }, 1000);
+  indexRTQuestion++;
 }
 
 function stopmet() {
+  marginleftRT = 1;
   metronomeRT = false;
   clearInterval(startBar);
+  clearInterval(inputBar);
   let ele = document.getElementsByClassName("a");
   for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
 }
 document.getElementById("shadow-bar").classList.add("hideApp");
-
+let marginleftRT = 1;
 function startRT() {
   document.getElementById("shadow-bar").classList.remove("hideApp");
   progressBar = 0;
@@ -386,9 +394,40 @@ function startRT() {
       ).style.backgroundColor = "red";
       progressBar++;
     } else {
+      marginleftRT = 0;
       progressBar = 0;
       let ele = document.getElementsByClassName("a");
       for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
     }
   }, 750);
+  inputBar = setInterval(() => {
+    marginleftRT = marginleftRT + 0.5;
+  }, 50);
+}
+
+function inputRT() {
+  let answer = document.createElement("div");
+  answer.setAttribute("id", "answerRT");
+  answer.classList.add("answerRtClass");
+  answer.style.marginLeft = marginleftRT.toString() + "%";
+  document.getElementById("sb-parent").appendChild(answer);
+}
+let solutionKeyRT = [
+  "40,225",
+  "40,120,320,430",
+  "40,160,280",
+  "40,155,270,345,450",
+  "40,150,225,300"
+];
+
+function showHint() {
+  // marginleftRT = 0;
+  solutionKeyRT[indexRTQuestion].split(",").forEach(x => {
+    console.log(x);
+    let solution = document.createElement("div");
+    solution.setAttribute("id", "solutionRT");
+    solution.classList.add("solutionClassRT");
+    solution.style.marginLeft = x.toString() + "px";
+    document.getElementById("sb-solution").appendChild(solution);
+  });
 }

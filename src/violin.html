@@ -55,8 +55,9 @@
             <!-- <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT"> -->
             <div>
                 <div id="buttonsRT">
-                    <button class="btn btn-block btn-danger" onclick="startRT()" style="flex-grow: 2;">Tap</button>
+                    <button class="btn btn-danger" onclick="inputRT()" style="flex-grow: 2;">Tap</button>
                     <button class="btn btn-light" onclick="nextQuestionRT()">Next</button>
+                    <button class="btn btn-warning" onclick="showHint()">Hint</button>
                 </div>
                 <p id="hintRI"></p>
             </div>
@@ -69,7 +70,11 @@
             </div>
             <div id="parentRT" style="position:relative;height: 130px;">
                 <div id="noteRT"></div>
-                <div id="shadow-bar"></div>
+                <div id="shadow-bar">
+                    <div id="sb-parent" style="display: flex;flex-direction: row;"></div>
+                    <div id="sb-solution" style="display: flex;flex-direction: row;"></div>
+                    <!-- <div style="margin-left:100px;width: 10px;height: 10px;background-color: yellow;"></div> -->
+                </div>
             </div>
         </div>
         <!-- ---------------------------------------------------------------------------- -->

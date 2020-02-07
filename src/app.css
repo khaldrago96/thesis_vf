@@ -194,7 +194,7 @@ li {
 
 #shadow-bar {
  position: absolute;
- background-color: lightslategray;
+ background-color: lightgreen;
  width: 500px;
  height: 10px;
  bottom: 0;
@@ -211,6 +211,21 @@ li {
 #boo,
 #noteRT {
  zoom: 70%;
+}
+
+.answerRtClass {
+ /* margin-left: 0px; */
+ width: 10px;
+ height: 10px;
+ border-radius: 100px;
+ background-color: yellow;
+}
+
+.solutionClassRT {
+ width: 10px !important;
+ height: 10px;
+ border-radius: 99px;
+ background-color: green;
 }
 
 /*Media Queries*/
@@ -230,7 +245,6 @@ li {
  #buttonsRT {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
  }
 
  #boo,
@@ -260,6 +274,10 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+ }
+
+ .item {
+  flex-grow: 1;
  }
 
  #piano {
