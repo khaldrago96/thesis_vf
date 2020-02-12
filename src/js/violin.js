@@ -311,7 +311,9 @@ let metronomeRT = false;
 let startBar, inputBar;
 let progressBar = 0;
 function createQuestionRT() {
-  startRT();
+  setTimeout(() => {
+    startRT();
+  }, 750);
   metronomeRT = true;
   playMetronomeRT();
   if (document.getElementById("noteRT") !== null) {
@@ -355,25 +357,30 @@ function nextQuestionRT() {
   document.getElementById("noteRT").remove();
   setTimeout(() => {
     createQuestionRT();
-  }, 1000);
+  }, 750);
   indexRTQuestion++;
 }
 
 function stopmet() {
-  marginleftRT = 1;
+  marginleftRT = 0;
   metronomeRT = false;
   clearInterval(startBar);
   clearInterval(inputBar);
   let ele = document.getElementsByClassName("a");
-  for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
+  for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
 }
 document.getElementById("shadow-bar").classList.add("hideApp");
 let marginleftRT = 1;
+
 function startRT() {
   document.getElementById("shadow-bar").classList.remove("hideApp");
   progressBar = 0;
+  document.getElementById("RT" + progressBar.toString()).style.backgroundColor =
+    "red";
+  progressBar++;
   startBar = setInterval(() => {
     if (progressBar < 4) {
+      console.log("left in else", progressBar);
       document.getElementById(
         "RT" + progressBar.toString()
       ).style.backgroundColor = "red";
@@ -382,20 +389,26 @@ function startRT() {
       marginleftRT = 0;
       progressBar = 0;
       let ele = document.getElementsByClassName("a");
-      for (let i = 0; i < 4; i++) ele[i].style.backgroundColor = "white";
+      for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
     }
   }, 750);
+
+  // setTimeout(() => {
   inputBar = setInterval(() => {
-    marginleftRT = marginleftRT + 0.5;
-  }, 50);
+    // if (marginleftRT > 500) marginleftRT = 0;
+    // else
+    marginleftRT = marginleftRT + 1;
+  }, 5);
+  // }, 750);
 }
 
 function inputRT() {
+  console.log(marginleftRT);
   let answer = document.createElement("div");
   answer.setAttribute("id", "answerRT");
   answer.classList.add("answerRtClass");
-  answer.style.marginLeft = marginleftRT.toString() + "%";
-  document.getElementById("sb-parent").appendChild(answer);
+  answer.style.left = marginleftRT.toString() + "px";
+  document.getElementById("shadow-bar").appendChild(answer);
 }
 let solutionKeyRT = [
   "35,275",

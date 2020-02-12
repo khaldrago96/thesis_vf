@@ -219,6 +219,7 @@ li {
  height: 10px;
  border-radius: 100px;
  background-color: yellow;
+ position: absolute;
 }
 
 .solutionClassRT {
