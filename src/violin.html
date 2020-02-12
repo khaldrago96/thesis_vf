@@ -50,17 +50,15 @@
         </div>
         <!-- ---------------------------------------------------------------------------- -->
         <!-- App Rhytm Tapping & Metronome -->
-        <div id="appRT" style="height: 85vh;width: 100%;position: relative;">
+        <div id="appRT" style="height: 85vh;width: 100%;">
             <p id="summaryRI"></p>
             <!-- <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT"> -->
-            <div>
-                <div id="buttonsRT">
-                    <button class="btn btn-danger" onclick="inputRT()" style="flex-grow: 2;">Tap</button>
-                    <button class="btn btn-light" onclick="nextQuestionRT()">Next</button>
-                    <button class="btn btn-warning" onclick="showHint()">Hint</button>
-                </div>
-                <p id="hintRI"></p>
+            <div id="buttonsRT">
+                <button class="btn btn-danger" onclick="inputRT()" style="flex-grow: 2;">Tap</button>
+                <button class="btn btn-light" onclick="nextQuestionRT()">Next</button>
+                <button class="btn btn-warning" onclick="showHint()">Hint</button>
             </div>
+            <p id="hintRI"></p>
 
             <div style="display: flex;flex-direction: row;">
                 <div class="stepbar-RT a" id="RT0"> </div>
@@ -68,12 +66,11 @@
                 <div class="stepbar-RT a" id="RT2"> </div>
                 <div class="stepbar-RT a" id="RT3"> </div>
             </div>
-            <div id="parentRT" style="position:relative;height: 130px;">
-                <div id="noteRT"></div>
+            <div id="parentRT" style="height: 130px;position: relative;">
+                <div id="noteRT" style="position: absolute;"></div>
                 <div id="shadow-bar">
                     <div id="sb-parent" style="display: flex;flex-direction: row;"></div>
                     <div id="sb-solution" style="display: flex;flex-direction: row;"></div>
-                    <!-- <div style="margin-left:100px;width: 10px;height: 10px;background-color: yellow;"></div> -->
                 </div>
             </div>
         </div>

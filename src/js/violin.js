@@ -21,26 +21,12 @@ document.getElementById("appII").classList.add("hideApp");
 document.getElementById("appRI").classList.add("hideApp");
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
-    let playSound = new buzz.sound(audioFiles[e.target.dataset.note]);
+    let playSound = new Audio(audioFiles[e.target.dataset.note]);
     playSound.play();
   }
 });
 
 // App Interval Identification
-// unison = 0,major second = 1, minor second = 2,
-/*
- 0. Unison C - 0
- 1. Major E F - 2
- 2. Major A# B - 2
- 3. Minor D D# - 1
- 4. Unison E - 0
- 5. Major B C5 - 2
- 6. Minor G G# - 1
-
- option a b c
-*/
-
-//exercises: index of audioFiles
 let intervalAppDb = [
   { s: "unison", q: [0, 0], startKey: "C" },
   { s: "major", q: [2, 3], startKey: "E" },
@@ -58,14 +44,16 @@ function createQuestion() {
   if (intervalAppIndex !== intervalAppDb.length) {
     IIstart = true;
     let indexToPlay = intervalAppDb[intervalAppIndex];
-    let x = new buzz.sound(audioFiles[indexToPlay.q[0]]);
-    let y = new buzz.sound(audioFiles[indexToPlay.q[1]]);
+    let x = new Audio(audioFiles[indexToPlay.q[0]]);
+    let y = new Audio(audioFiles[indexToPlay.q[1]]);
     document.getElementById("hint").innerHTML =
       "First key to be played: " + indexToPlay.startKey;
-    x.play();
+    setTimeout(() => {
+      x.play();
+    }, 600);
     setTimeout(() => {
       y.play();
-    }, 600);
+    }, 1200);
   } else nextQ();
 }
 
@@ -80,14 +68,12 @@ function checkIntervalAppAnswer(clickedBtn) {
       indicator.innerHTML = "Correct!";
       correctInput.classList.add("btn-success");
       correctInput.classList.remove("btn-info");
-      // new buzz.sound("./assets/audio/right-answer.mp3").play();
     } else {
       indicator.style.color = "red";
       indicator.innerHTML = "Wrong!";
       correctInput.classList.add("btn-danger");
       document.getElementById(answer).classList.remove("btn-info");
       document.getElementById(answer).classList.add("btn-success");
-      // new buzz.sound("./assets/audio/wrong-answer.mp3").play();
     }
   }
 }
@@ -351,13 +337,13 @@ function createQuestionRT() {
 }
 
 function playMetronomeRT() {
-  // const m = new Audio("assets/audio/metronome.wav");
-  // m.addEventListener("ended", playMetronomeRT);
-  // if (metronomeRT)
-  //   setTimeout(() => {
-  //     m.play();
-  //   }, 750);
-  // else return;
+  const m = new Audio("assets/audio/metronome.wav");
+  m.addEventListener("ended", playMetronomeRT);
+  if (metronomeRT)
+    setTimeout(() => {
+      m.play();
+    }, 750);
+  else return;
 }
 function nextQuestionRT() {
   console.log("next");
@@ -365,7 +351,6 @@ function nextQuestionRT() {
   let removeSolutionRT = document.getElementById("sb-solution");
   let removeAnswerRT = document.getElementById("sb-parent");
   while (removeSolutionRT.firstChild) removeSolutionRT.firstChild.remove();
-  console.log(removeSolutionRT.firstChild !== null);
   while (removeAnswerRT.firstChild) removeAnswerRT.firstChild.remove();
   document.getElementById("noteRT").remove();
   setTimeout(() => {
@@ -413,21 +398,19 @@ function inputRT() {
   document.getElementById("sb-parent").appendChild(answer);
 }
 let solutionKeyRT = [
-  "40,225",
-  "40,120,320,430",
-  "40,160,280",
-  "40,155,270,345,450",
-  "40,150,225,300"
+  "35,275",
+  "35,115,320,430",
+  "35,160,282",
+  "35,145,252,328,433",
+  "35,150,225,303"
 ];
 
 function showHint() {
-  // marginleftRT = 0;
   solutionKeyRT[indexRTQuestion].split(",").forEach(x => {
-    console.log(x);
     let solution = document.createElement("div");
     solution.setAttribute("id", "solutionRT");
     solution.classList.add("solutionClassRT");
-    solution.style.marginLeft = x.toString() + "px";
+    solution.style.left = x.toString() + "px";
     document.getElementById("sb-solution").appendChild(solution);
   });
 }
