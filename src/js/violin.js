@@ -307,14 +307,22 @@ let rhythmTappingDb = [
   "G4/q,G4/8,G4/8,G4/h"
 ];
 let indexRTQuestion = 0;
-let metronomeRT = false;
 let startBar, inputBar;
 let progressBar = 0;
+let marginleftRT = 20;
+let solutionKeyRT = [
+  "25,265",
+  "25,105,315,430",
+  "25,150,272",
+  "25,135,245,320,432",
+  "25,140,215,295"
+];
+document.getElementById("shadow-bar").classList.add("hideApp");
+
 function createQuestionRT() {
   setTimeout(() => {
     startRT();
   }, 750);
-  metronomeRT = true;
   playMetronomeRT();
   if (document.getElementById("noteRT") !== null) {
     document.getElementById("noteRT").remove();
@@ -330,93 +338,74 @@ function createQuestionRT() {
   var system = vf.System();
 
   score.set({ time: "4/4" });
-  system
-    .addStave({
-      voices: [score.voice(score.notes(rhythmTappingDb[indexRTQuestion]))]
-    })
-    .addTimeSignature("4/4");
+  system.addStave({
+    voices: [score.voice(score.notes(rhythmTappingDb[indexRTQuestion]))]
+  });
   vf.draw();
 }
 
-function playMetronomeRT() {
-  const m = new Audio("assets/audio/metronome.wav");
-  m.addEventListener("ended", playMetronomeRT);
-  if (metronomeRT)
-    setTimeout(() => {
-      m.play();
-    }, 750);
-  else return;
-}
-function nextQuestionRT() {
-  console.log("next");
-  stopmet();
-  let removeSolutionRT = document.getElementById("sb-solution");
-  let removeAnswerRT = document.getElementById("sb-parent");
-  while (removeSolutionRT.firstChild) removeSolutionRT.firstChild.remove();
-  while (removeAnswerRT.firstChild) removeAnswerRT.firstChild.remove();
-  document.getElementById("noteRT").remove();
-  setTimeout(() => {
-    createQuestionRT();
-  }, 750);
-  indexRTQuestion++;
-}
-
-function stopmet() {
-  marginleftRT = 0;
-  metronomeRT = false;
-  clearInterval(startBar);
-  clearInterval(inputBar);
-  let ele = document.getElementsByClassName("a");
-  for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
-}
-document.getElementById("shadow-bar").classList.add("hideApp");
-let marginleftRT = 1;
-
 function startRT() {
   document.getElementById("shadow-bar").classList.remove("hideApp");
-  progressBar = 0;
-  document.getElementById("RT" + progressBar.toString()).style.backgroundColor =
-    "red";
-  progressBar++;
   startBar = setInterval(() => {
     if (progressBar < 4) {
-      console.log("left in else", progressBar);
       document.getElementById(
         "RT" + progressBar.toString()
       ).style.backgroundColor = "red";
       progressBar++;
     } else {
       marginleftRT = 0;
-      progressBar = 0;
+      progressBar = 1;
       let ele = document.getElementsByClassName("a");
       for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
     }
   }, 750);
-
-  // setTimeout(() => {
   inputBar = setInterval(() => {
-    // if (marginleftRT > 500) marginleftRT = 0;
-    // else
     marginleftRT = marginleftRT + 1;
-  }, 5);
-  // }, 750);
+  }, 6);
+}
+
+function playMetronomeRT() {
+  const m = new Audio("assets/audio/metronome.wav");
+  metronomebar = setInterval(() => {
+    m.play();
+  }, 750);
+}
+
+function nextQuestionRT() {
+  stopmet();
+  progressBar = 0;
+  let removeSolutionRT = document.getElementById("sb-solution");
+  let removeAnswerRT = document.getElementById("sb-parent");
+  while (removeSolutionRT.firstChild) removeSolutionRT.firstChild.remove();
+  while (removeAnswerRT.firstChild) removeAnswerRT.firstChild.remove();
+  document.getElementById("noteRT").remove();
+  indexRTQuestion++;
+  if (indexRTQuestion !== rhythmTappingDb.length)
+    setTimeout(() => {
+      createQuestionRT();
+    }, 750);
+  else {
+    document.getElementById("appRT").classList.add("hideApp");
+    console.log("END");
+  }
+}
+
+function stopmet() {
+  marginleftRT = 0;
+  clearInterval(metronomebar);
+  clearInterval(inputBar);
+  let ele = document.getElementsByClassName("a");
+  clearInterval(startBar);
+  for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
 }
 
 function inputRT() {
-  console.log(marginleftRT);
   let answer = document.createElement("div");
   answer.setAttribute("id", "answerRT");
   answer.classList.add("answerRtClass");
   answer.style.left = marginleftRT.toString() + "px";
-  document.getElementById("shadow-bar").appendChild(answer);
+  document.getElementById("sb-parent").appendChild(answer);
 }
-let solutionKeyRT = [
-  "35,275",
-  "35,115,320,430",
-  "35,160,282",
-  "35,145,252,328,433",
-  "35,150,225,303"
-];
 
 function showHint() {
   solutionKeyRT[indexRTQuestion].split(",").forEach(x => {
@@ -426,4 +415,7 @@ function showHint() {
     solution.style.left = x.toString() + "px";
     document.getElementById("sb-solution").appendChild(solution);
   });
+  let blurAnswer = document.getElementsByClassName("answerRtClass");
+  for (let i = 0; i < blurAnswer.length; i++)
+    blurAnswer[i].style.opacity = "0.5";
 }

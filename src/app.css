@@ -194,7 +194,7 @@ li {
 
 #shadow-bar {
  position: absolute;
- background-color: lightgreen;
+ background-color: rgb(170, 179, 170);
  width: 500px;
  height: 10px;
  bottom: 0px;
@@ -226,8 +226,10 @@ li {
  width: 10px !important;
  height: 10px;
  border-radius: 99px;
- background-color: red;
+ background-color: green;
  position: absolute;
+ opacity: 1;
+ z-index: 999;
 }
 
 /*Media Queries*/
