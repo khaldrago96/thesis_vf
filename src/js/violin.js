@@ -386,7 +386,7 @@ function nextQuestionRT() {
     }, 750);
   else {
     document.getElementById("appRT").classList.add("hideApp");
-    console.log("END");
+    endPage();
   }
 }
 
@@ -418,4 +418,9 @@ function showHint() {
   let blurAnswer = document.getElementsByClassName("answerRtClass");
   for (let i = 0; i < blurAnswer.length; i++)
     blurAnswer[i].style.opacity = "0.5";
+}
+
+document.getElementById("endPage").classList.add("hideApp");
+function endPage() {
+  document.getElementById("endPage").classList.remove("hideApp");
 }
