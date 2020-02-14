@@ -33,6 +33,14 @@ let rhytmInputDb = [
     { q: [1, 1, 2, 4] }
 ];
 
+solutionKeyRI = [
+    "G4/h,G4/h",
+    "G4/8,G4/8,G4/h,G4/q",
+    "G4/q,G4/h,G4/8,G4/8",
+    "G4/h,G4/q,G4/q",
+    "G4/8,G4/8,G4/q,G4/h"
+]
+
 
 //App Rhythm Tapping
 let rhythmTappingDb = [

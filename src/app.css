@@ -4,6 +4,10 @@ body {
  margin-left: 0px;
 }
 
+#appName {
+ text-align: center;
+}
+
 .container {
  height: 100% !important;
  background-color: #e3f2fd !important;

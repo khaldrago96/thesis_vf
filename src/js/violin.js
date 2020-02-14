@@ -1,3 +1,41 @@
+document.getElementById("appName").innerHTML = "App: Rhythm Input";
+document.getElementById("appII").classList.add("hideApp");
+document.getElementById("appRT").classList.add("hideApp");
+function showApp(appId) {
+  let app1 = document.getElementById("appRI");
+  let app2 = document.getElementById("appRT");
+  let app3 = document.getElementById("appII");
+  if (appId.id === "RI") {
+    document.getElementById("appName").innerHTML = "App: Rhythm Input";
+    app1.classList.remove("hideApp");
+    app2.classList.add("hideApp");
+    app3.classList.add("hideApp");
+    endAppRT();
+  } else if (appId.id === "RT") {
+    document.getElementById("appName").innerHTML = "App: Rhythm Tapping";
+    app2.classList.remove("hideApp");
+    app1.classList.add("hideApp");
+    app3.classList.add("hideApp");
+    createQuestionRT();
+    endAppRI();
+  } else {
+    document.getElementById("appName").innerHTML =
+      "App: Interval Identification";
+    app3.classList.remove("hideApp");
+    app1.classList.add("hideApp");
+    app2.classList.add("hideApp");
+    intervalAppIndex = 0;
+    trueAnswer = 0;
+    IIstart = false;
+    document.getElementById("hint").innerHTML = "";
+    indicator.innerHTML = "";
+    document.getElementById("appInterval").classList.remove("hideApp");
+    endAppRT();
+    endAppRI();
+  }
+}
+
+// App Interval Identification
 let audioFiles = [
   "assets/audio/piano/040-c.wav",
   "assets/audio/piano/042-d.wav",
@@ -14,11 +52,10 @@ let audioFiles = [
   "assets/audio/piano/050-ax.wav"
 ];
 let pianoBuzz = document.getElementById("piano");
-let helper;
-let rightAnswer = 0;
-let totalQuestion = 0;
-document.getElementById("appII").classList.add("hideApp");
-document.getElementById("appRI").classList.add("hideApp");
+let indicator = document.getElementById("indicator");
+var intervalAppIndex = 0;
+var trueAnswer = 0;
+var IIstart = false;
 pianoBuzz.addEventListener("mousedown", e => {
   if (e.target.dataset.note !== "100") {
     let playSound = new Audio(audioFiles[e.target.dataset.note]);
@@ -26,7 +63,6 @@ pianoBuzz.addEventListener("mousedown", e => {
   }
 });
 
-// App Interval Identification
 let intervalAppDb = [
   { s: "unison", q: [0, 0], startKey: "C" },
   { s: "major", q: [2, 3], startKey: "E" },
@@ -37,9 +73,6 @@ let intervalAppDb = [
   { s: "minor", q: [4, 11], startKey: "G" }
 ];
 
-var intervalAppIndex = 0;
-var trueAnswer = 0;
-var IIstart = false;
 function createQuestion() {
   if (intervalAppIndex !== intervalAppDb.length) {
     IIstart = true;
@@ -57,7 +90,6 @@ function createQuestion() {
   } else nextQ();
 }
 
-let indicator = document.getElementById("indicator");
 function checkIntervalAppAnswer(clickedBtn) {
   if (IIstart) {
     let answer = intervalAppDb[intervalAppIndex].s;
@@ -93,33 +125,32 @@ function nextQ() {
     document.getElementById("appInterval").classList.add("hideApp");
     document.getElementById("hint").innerHTML = "Exercise done!";
     indicator.innerHTML = "Score: " + trueAnswer + "/" + intervalAppDb.length;
+    setTimeout(() => {
+      endAppRI();
+    }, 1500);
   }
-
   intervalAppIndex++;
-}
-
-function showApp(appId) {
-  let app1 = document.getElementById("appRI");
-  let app2 = document.getElementById("appRT");
-  let app3 = document.getElementById("appII");
-  if (appId.id === "RI") {
-    app1.classList.remove("hideApp");
-    app2.classList.add("hideApp");
-    app3.classList.add("hideApp");
-  } else if (appId.id === "RT") {
-    app2.classList.remove("hideApp");
-    app1.classList.add("hideApp");
-    app3.classList.add("hideApp");
-    createQuestionRT();
-  } else {
-    app3.classList.remove("hideApp");
-    app1.classList.add("hideApp");
-    app2.classList.add("hideApp");
-  }
 }
 
 // App Rhytm Input
 //App Rhytm Input Exercises
+function endAppRI() {
+  if (document.getElementById("RIsolution") !== null)
+    document.getElementById("RIsolution").remove();
+  if (document.getElementById("boo") !== null)
+    document.getElementById("boo").remove();
+  document.getElementById("hintRI").innerHTML = "";
+  questionPlayer = 0;
+  questionRI;
+  indexRIQuestion = 0;
+  i_RI_userInput = [];
+  startMetronome = true;
+  metronomeBeats = 0;
+  i = 0;
+  noteInput = [];
+  letsCount = 0;
+  trueAnswerRI = 0;
+}
 let rhytmInputDb = [
   { q: [4, 4] },
   { q: [1, 1, 4, 2] },
@@ -127,7 +158,13 @@ let rhytmInputDb = [
   { q: [4, 2, 2] },
   { q: [1, 1, 2, 4] }
 ];
-
+solutionKeyRI = [
+  "G4/h,G4/h",
+  "G4/8,G4/8,G4/h,G4/q",
+  "G4/q,G4/h,G4/8,G4/8",
+  "G4/h,G4/q,G4/q",
+  "G4/8,G4/8,G4/q,G4/h"
+];
 var questionPlayer = 0;
 let questionRI;
 let indexRIQuestion = 0;
@@ -149,7 +186,6 @@ function addInput(e) {
   eleBoo.setAttribute("id", "boo");
   document.getElementById("parent").appendChild(eleBoo);
   vf = new VF.Factory({ renderer: { elementId: "boo", width: 500 } });
-
   var score = vf.EasyScore();
   var system = vf.System();
   switch (e.id) {
@@ -252,9 +288,12 @@ function playMetronome() {
 }
 
 function nextQuestionRI() {
+  if (document.getElementById("RIsolution") !== null)
+    document.getElementById("RIsolution").remove();
   if (indexRIQuestion !== rhytmInputDb.length) {
     i_RI_userInput = [];
-    document.getElementById("boo").remove();
+    if (document.getElementById("boo") !== null)
+      document.getElementById("boo").remove();
     noteInput = [];
     letsCount = 0;
     document.getElementById("hintRI").innerHTML = "";
@@ -267,6 +306,11 @@ function nextQuestionRI() {
     document.getElementById("appRhytmI").classList.add("hideApp");
     document.getElementById("summaryRI").innerHTML =
       "Exercise done! <br>Score: " + trueAnswerRI + "/" + rhytmInputDb.length;
+    setTimeout(() => {
+      endAppRI();
+      document.getElementById("appRhytmI").classList.remove("hideApp");
+      document.getElementById("summaryRI").innerHTML = "";
+    }, 1500);
   }
 }
 function submitAnswerRI() {
@@ -285,6 +329,28 @@ function submitAnswerRI() {
     } else {
       document.getElementById("hintRI").innerHTML = "Wrong!";
       document.getElementById("hintRI").style.color = "red";
+
+      solutionNoteRI = document.createElement("div");
+      solutionNoteRI.setAttribute("id", "RIsolution");
+      solutionNoteRI.classList.add("class-note");
+      solutionNoteRI.style.zoom = "0.7";
+      solutionNoteRI.style.backgroundColor = "lightgreen";
+      document.getElementById("parent").appendChild(solutionNoteRI);
+      avf = new VF.Factory({
+        renderer: {
+          elementId: "RIsolution",
+          width: 500,
+          height: 100
+        }
+      });
+      var score = avf.EasyScore();
+      var system = avf.System();
+
+      score.set({ time: "4/4" });
+      system.addStave({
+        voices: [score.voice(score.notes(solutionKeyRI[indexRIQuestion]))]
+      });
+      avf.draw();
     }
   }
 }
@@ -299,6 +365,19 @@ function popAnswer() {
 }
 
 /* App Rhytm Tapping */
+function endAppRT() {
+  indexRTQuestion = 0;
+  marginleftRT = 20;
+  progressBar = 0;
+  clearInterval(startBar);
+  clearInterval(metronomebar);
+  clearInterval(inputBar);
+  if (document.getElementById("noteRT") !== null)
+    document.getElementById("noteRT").remove();
+  let ele = document.getElementsByClassName("a");
+  for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
+  document.getElementById("shadow-bar").classList.add("hideApp");
+}
 let rhythmTappingDb = [
   "G4/h,G4/h",
   "G4/8,G4/h,G4/q,G4/8",
@@ -307,7 +386,7 @@ let rhythmTappingDb = [
   "G4/q,G4/8,G4/8,G4/h"
 ];
 let indexRTQuestion = 0;
-let startBar, inputBar;
+let startBar, inputBar, metronomebar;
 let progressBar = 0;
 let marginleftRT = 20;
 let solutionKeyRT = [
@@ -386,7 +465,7 @@ function nextQuestionRT() {
     }, 750);
   else {
     document.getElementById("appRT").classList.add("hideApp");
-    endPage();
+    document.getElementById("endPageRT").classList.remove("hideApp");
   }
 }
 
@@ -420,7 +499,8 @@ function showHint() {
     blurAnswer[i].style.opacity = "0.5";
 }
 
-document.getElementById("endPage").classList.add("hideApp");
-function endPage() {
-  document.getElementById("endPage").classList.remove("hideApp");
+document.getElementById("endPageRT").classList.add("hideApp");
+
+function endPageRT() {
+  document.getElementById("endPageRT").classList.remove("hideApp");
 }
