@@ -158,7 +158,8 @@ let rhytmInputDb = [
   { q: [4, 2, 2] },
   { q: [1, 1, 2, 4] }
 ];
-solutionKeyRI = [
+
+let solutionKeyRI = [
   "G4/h,G4/h",
   "G4/8,G4/8,G4/h,G4/q",
   "G4/q,G4/h,G4/8,G4/8",
@@ -185,7 +186,9 @@ function addInput(e) {
   eleBoo = document.createElement("div");
   eleBoo.setAttribute("id", "boo");
   document.getElementById("parent").appendChild(eleBoo);
-  vf = new VF.Factory({ renderer: { elementId: "boo", width: 500 } });
+  vf = new VF.Factory({
+    renderer: { elementId: "boo", width: 500, height: 100 }
+  });
   var score = vf.EasyScore();
   var system = vf.System();
   switch (e.id) {
@@ -348,7 +351,19 @@ function submitAnswerRI() {
 
       score.set({ time: "4/4" });
       system.addStave({
-        voices: [score.voice(score.notes(solutionKeyRI[indexRIQuestion]))]
+        voices: [
+          score.voice(
+            score.notes(
+              rhytmInputDb[indexRIQuestion].q
+                .map(x => {
+                  if (x == 1) return "G4/8";
+                  else if (x == 2) return "G4/q";
+                  else return "G4/h";
+                })
+                .join(",")
+            )
+          )
+        ]
       });
       avf.draw();
     }

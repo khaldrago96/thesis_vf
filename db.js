@@ -33,7 +33,7 @@ let rhytmInputDb = [
     { q: [1, 1, 2, 4] }
 ];
 
-solutionKeyRI = [
+let solutionKeyRI = [
     "G4/h,G4/h",
     "G4/8,G4/8,G4/h,G4/q",
     "G4/q,G4/h,G4/8,G4/8",
