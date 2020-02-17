@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  </link>
+  <link rel="stylesheet" href="./app.css">
+  <meta name="theme-color" content="#2196f3" />
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="./whiteicon.png">
+</head>
+
+<body>
+  <div class="container">
+    <h3 id="appName">
+    </h3>
+    <div class="button-navigation">
+      <button class="btn btn-dark" onclick="showApp(this)" id="RI">Rhytm Input</button>
+      <button class="btn btn-dark" onclick="showApp(this)" id="RT">Rhytm Tapping</button>
+      <button class="btn btn-dark" onclick="showApp(this)" id="II">Interval Identification</button>
+    </div>
+    <br>
+    <!-- <h2 style="text-align: center; margin-top: 10px; color:crimson;">App : App Name </h2> -->
+
+    <div id="appRI">
+      <p id="summaryRI"></p>
+      <div style="height: 85vh;width: 100%;position: relative;" id="appRhytmI">
+        <div id="button-container-appRI">
+          <input type="image" id="1" src="assets/images/eigth-note.png" onclick="addInput(this)" value="1"
+            class="note-input">
+          <input type="image" id="2" src="assets/images/quarter-note.png" onclick="addInput(this)" value="2"
+            class="note-input">
+          <input type="image" id="4" src="assets/images/half.png" onclick="addInput(this)" value="4" class="note-input">
+          <input type="image" class="action-delete" id="action-btn" src="assets/images/delete.png"
+            onclick="popAnswer()">
+          <input type="image" src="assets/images/play.png" id="action-btn" id="action-btn" onclick="collectAnswer()">
+        </div>
+        <div id="button-container-appRI">
+          <button class="btn btn-warning" onclick="repeatQuestion()">Play Sound</button> <button class="btn btn-success"
+            onclick="submitAnswerRI()">Submit</button>
+          <button class="btn btn-light" onclick="nextQuestionRI()" style="width: 70px;">next</button>
+        </div>
+        <p id="hintRI"></p>
+        <div id="parent" style="margin-left: 10px;">
+          <div class="music-note" id="boo"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------- -->
+    <!-- App Rhytm Tapping & Metronome -->
+    <div id="appRT" style="height: 85vh;width: 100%;">
+      <p id="summaryRI"></p>
+      <!-- <div style="height: 400px;width: 100%;position: relative;" id="appRhytmT"> -->
+      <div id="buttonsRT">
+        <button class="btn btn-danger" onclick="inputRT()" style="flex-grow: 2;">Tap</button>
+        <button class="btn btn-light" onclick="nextQuestionRT()">Next</button>
+        <button class="btn btn-warning" onclick="showHint()">Hint</button>
+      </div>
+      <p id="hintRI"></p>
+
+      <div style="display: flex;flex-direction: row;">
+        <div class="stepbar-RT a" id="RT0"> </div>
+        <div class="stepbar-RT a" id="RT1"> </div>
+        <div class="stepbar-RT a" id="RT2"> </div>
+        <div class="stepbar-RT a" id="RT3"> </div>
+      </div>
+      <div id="parentRT" style="height: 130px;position: relative;">
+        <div id="noteRT" style="position: absolute;"></div>
+        <div id="shadow-bar">
+          <div id="sb-parent" style="display: flex;flex-direction: row;"></div>
+          <div id="sb-solution" style="display: flex;flex-direction: row;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------- -->
+    <!-- exercises and button  -->
+    <div id="appII">
+      <p id="hint"></p>
+      <p id="indicator"></p>
+      <div id="appInterval" style="height: 95hv;position: relative;">
+        <div id="inputButtonsII">
+          <button class="btn btn-info a" value=0 onclick="checkIntervalAppAnswer(this)" id="unison">Unison</button>
+          <button class="btn btn-info a" value=1 onclick="checkIntervalAppAnswer(this)" id="minor">Minor
+            Second</button>
+          <button class="btn btn-info a" value=2 onclick="checkIntervalAppAnswer(this)" id="major">Major
+            Second</button>
+        </div>
+        <br>
+        <div id="buttonsII">
+          <button class="btn btn-warning" onclick="createQuestion()">Play Sound</button>
+          <button class="btn btn-light" onclick="nextQ()">next</button>
+        </div>
+        <br>
+      </div>
+      <!-- PIANO -->
+      <div>
+        <h1 style="text-align: center;">Piano</h1>
+        <div class="piano-scroller" style="margin-left:-20px">
+          <ul id="piano" data-note="100">
+            <li data-note="0" id="0" class="key">
+              <div data-note="8" class="black-key">C#</div>
+              C
+            </li>
+            <li data-note="1" class="key">
+              <div data-note="9" class="black-key">D#</div>
+              D
+            </li>
+            <li data-note="2" class="key">
+              E
+            </li>
+            <li data-note="3" class="key">
+              <div data-note="10" class="black-key">F#</div>
+              F
+            </li>
+            <li data-note="4" class="key">
+              <div data-note="11" class="black-key">G#</div>
+              G
+            </li>
+            <li data-note="5" class="key">
+              <div data-note="12" class="black-key">A#</div>
+              A
+            </li>
+            <li data-note="6" class="key">
+              B
+            </li>
+            <li data-note="7" class="key">
+              <div data-note="100" class="black-key"></div>
+              C5
+            </li>
+            <li data-note="100" class="key"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 id="endPageRT" style="text-align: center;">Exercise done.</h4>
+    </div>
+  </div>
+
+</body>
+
+<script src="js/libs/lodash.js"></script>
+<script src="js/libs/vexflow-debug.js"></script>
+<script src="sw.js"></script>
+<script src="js/violin.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('sw.js')
+      .then(function () { console.log("Service Worker Registered"); });
+  }
+</script>
+
+</html>
