@@ -112,7 +112,7 @@ function checkIntervalAppAnswer(clickedBtn) {
 
 function nextQ() {
   if (IIstart && intervalAppIndex !== intervalAppDb.length) {
-    let items = document.querySelectorAll(".a");
+    let items = document.querySelectorAll(".met-bar");
     indicator.innerHTML = "";
     for (let i = 0; i < items.length; i++) {
       items[i].classList.remove("btn-success", "btn-danger");
@@ -313,7 +313,7 @@ function nextQuestionRI() {
       endAppRI();
       document.getElementById("appRhytmI").classList.remove("hideApp");
       document.getElementById("summaryRI").innerHTML = "";
-    }, 1500);
+    }, 3000);
   }
 }
 function submitAnswerRI() {
@@ -389,7 +389,7 @@ function endAppRT() {
   clearInterval(inputBar);
   if (document.getElementById("noteRT") !== null)
     document.getElementById("noteRT").remove();
-  let ele = document.getElementsByClassName("a");
+  let ele = document.getElementsByClassName("met-bar");
   for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
   document.getElementById("shadow-bar").classList.add("hideApp");
 }
@@ -449,7 +449,7 @@ function startRT() {
     } else {
       marginleftRT = 0;
       progressBar = 1;
-      let ele = document.getElementsByClassName("a");
+      let ele = document.getElementsByClassName("met-bar");
       for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
     }
   }, 750);
@@ -488,7 +488,7 @@ function stopmet() {
   marginleftRT = 0;
   clearInterval(metronomebar);
   clearInterval(inputBar);
-  let ele = document.getElementsByClassName("a");
+  let ele = document.getElementsByClassName("met-bar");
   clearInterval(startBar);
   for (let i = 1; i < 4; i++) ele[i].style.backgroundColor = "white";
 }

@@ -16,13 +16,13 @@ self.addEventListener("fetch", function (event) {
                         //     "fetch completed: " + event.request.url,
                         //     networkResponse
                         // );
-                        if (networkResponse) {
-                            // console.debug(
-                            //     "updated cached page: " + event.request.url,
-                            //     networkResponse
-                            // );
-                            cache.put(event.request, networkResponse.clone());
-                        }
+                        // if (networkResponse) {
+                        //     // console.debug(
+                        //     //     "updated cached page: " + event.request.url,
+                        //     //     networkResponse
+                        //     // );
+                        //     cache.put(event.request, networkResponse.clone());
+                        // }
                         return networkResponse;
                     },
                     function (event) {
