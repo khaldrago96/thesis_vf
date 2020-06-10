@@ -1,9 +1,9 @@
-# Thesis - A progresive Webapp with Vexflow
-Created with HTML JS & CSS.
+# Thesis - A progressive Webapp with Vexflow
+Created with HTML, JS & CSS.
 
 The latest version is on deployment branch
 
-Final Version will be an app for music learning which adopts the "Perfect Ears" similar functionalities.
+Final Version will be a progressive app for music learning which adopts the "Perfect Ears" similar functionalities.
 <br/>
 <br/>
 Demo can be found: [here](https://thesis-dw96.web.app/)
